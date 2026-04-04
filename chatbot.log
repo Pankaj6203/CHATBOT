@@ -1,0 +1,151 @@
+2026-04-04 14:37:56,814 - INFO - Chatbot initialized
+2026-04-04 14:37:56,815 - INFO - New session created for +919876543210
+2026-04-04 14:37:56,815 - INFO - User +919876543210 - Intent: greeting, State: welcome
+2026-04-04 14:37:56,815 - INFO - User +919876543210 - Intent: item_selection, State: menu
+2026-04-04 14:37:56,816 - INFO - User +919876543210 - Intent: item_selection, State: entering_quantity
+2026-04-04 14:37:56,816 - INFO - User +919876543210 - Intent: menu, State: entering_quantity
+2026-04-04 14:37:56,817 - INFO - User +919876543210 - Intent: item_selection, State: menu
+2026-04-04 14:37:56,818 - INFO - User +919876543210 - Intent: item_selection, State: entering_quantity
+2026-04-04 14:37:56,818 - INFO - User +919876543210 - Intent: view_cart, State: entering_quantity
+2026-04-04 14:37:56,819 - INFO - User +919876543210 - Intent: checkout, State: entering_quantity
+2026-04-04 14:37:56,819 - INFO - User +919876543210 - Intent: confirm, State: entering_quantity
+2026-04-04 14:38:38,749 - INFO - Chatbot initialized
+2026-04-04 14:38:38,750 - INFO - New session created for +919876543210
+2026-04-04 14:38:38,750 - INFO - User +919876543210 - Intent: greeting, State: welcome
+2026-04-04 14:38:38,750 - INFO - User +919876543210 - Intent: item_selection, State: menu
+2026-04-04 14:38:38,750 - INFO - User +919876543210 - Intent: item_selection, State: entering_quantity
+2026-04-04 14:38:38,750 - INFO - User +919876543210 - Intent: menu, State: add_more
+2026-04-04 14:38:38,750 - INFO - User +919876543210 - Intent: item_selection, State: menu
+2026-04-04 14:38:38,750 - INFO - User +919876543210 - Intent: item_selection, State: entering_quantity
+2026-04-04 14:38:38,750 - INFO - User +919876543210 - Intent: view_cart, State: add_more
+2026-04-04 14:38:38,752 - INFO - User +919876543210 - Intent: checkout, State: add_more
+2026-04-04 14:38:38,753 - INFO - User +919876543210 - Intent: confirm, State: checkout
+2026-04-04 14:38:38,753 - INFO - Order: ORD-1775293718, Total: Rs 145
+2026-04-04 14:38:48,891 - INFO - Chatbot initialized
+2026-04-04 14:38:48,891 - INFO - New session created for +919876543210
+2026-04-04 14:38:48,891 - INFO - User +919876543210 - Intent: greeting, State: welcome
+2026-04-04 14:38:48,891 - INFO - User +919876543210 - Intent: item_selection, State: menu
+2026-04-04 14:38:48,891 - INFO - User +919876543210 - Intent: item_selection, State: entering_quantity
+2026-04-04 14:38:48,891 - INFO - User +919876543210 - Intent: menu, State: add_more
+2026-04-04 14:38:48,891 - INFO - User +919876543210 - Intent: item_selection, State: menu
+2026-04-04 14:38:48,891 - INFO - User +919876543210 - Intent: item_selection, State: entering_quantity
+2026-04-04 14:38:48,892 - INFO - User +919876543210 - Intent: view_cart, State: add_more
+2026-04-04 14:38:48,892 - INFO - User +919876543210 - Intent: checkout, State: add_more
+2026-04-04 14:38:48,892 - INFO - User +919876543210 - Intent: confirm, State: checkout
+2026-04-04 14:38:48,892 - INFO - Order: ORD-1775293728, Total: Rs 145
+2026-04-04 14:44:14,602 - INFO - Chatbot initialized
+2026-04-04 15:02:29,341 - INFO - Database initialized successfully
+2026-04-04 15:02:29,344 - INFO - Inserted 4 menu items
+2026-04-04 15:02:29,350 - INFO - Loaded 4 items from database
+2026-04-04 15:02:29,350 - INFO - Chatbot initialized
+2026-04-04 15:02:29,350 - INFO - New session created for +919876543210
+2026-04-04 15:02:29,354 - INFO - User +919876543210 - Intent: greeting, State: welcome
+2026-04-04 15:04:34,580 - INFO - Database initialized successfully
+2026-04-04 15:04:34,581 - INFO - Inserted 0 menu items
+2026-04-04 15:04:34,581 - INFO - Loaded 4 items from database
+2026-04-04 15:04:34,581 - INFO - Chatbot initialized
+2026-04-04 15:04:34,582 - INFO - New session created for +916203454484
+2026-04-04 15:04:34,588 - INFO - User +916203454484 - Intent: greeting, State: welcome
+2026-04-04 15:04:34,588 - INFO - User +916203454484 - Intent: item_selection, State: menu
+2026-04-04 15:04:34,589 - INFO - User +916203454484 - Intent: item_selection, State: entering_quantity
+2026-04-04 15:04:34,590 - INFO - User +916203454484 - Intent: view_cart, State: add_more
+2026-04-04 15:04:34,591 - INFO - User +916203454484 - Intent: checkout, State: add_more
+2026-04-04 15:04:34,591 - INFO - User +916203454484 - Intent: confirm, State: checkout
+2026-04-04 15:04:34,592 - INFO - Order: ORD-1775295274, Total: Rs 100.0
+2026-04-04 15:29:08,515 - INFO - Database initialized successfully
+2026-04-04 15:29:08,516 - INFO - Loaded 4 items from database
+2026-04-04 15:29:08,516 - INFO - Chatbot initialized
+2026-04-04 15:31:29,327 - INFO - \u2713 MongoDB connection successful
+2026-04-04 15:31:30,457 - INFO - \u2713 Collections and indexes initialized
+2026-04-04 15:31:30,457 - INFO - \u2713 Connected to MongoDB Atlas
+2026-04-04 15:31:30,528 - INFO - Loaded 5 items from database
+2026-04-04 15:31:30,528 - INFO - Chatbot initialized
+2026-04-04 15:31:30,528 - INFO - \u2713 ChatbotEngine initialized
+2026-04-04 15:31:30,609 - INFO - \u2713 Menu already exists in database: 5 items
+2026-04-04 15:31:30,609 - INFO - Services initialized successfully
+2026-04-04 15:31:30,809 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.111.180.132:5000
+2026-04-04 15:31:30,809 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-04 15:31:30,811 - INFO -  * Restarting with stat
+2026-04-04 15:31:32,691 - INFO - \u2713 MongoDB connection successful
+2026-04-04 15:31:33,860 - INFO - \u2713 Collections and indexes initialized
+2026-04-04 15:31:33,860 - INFO - \u2713 Connected to MongoDB Atlas
+2026-04-04 15:31:33,928 - INFO - Loaded 5 items from database
+2026-04-04 15:31:33,929 - INFO - Chatbot initialized
+2026-04-04 15:31:33,929 - INFO - \u2713 ChatbotEngine initialized
+2026-04-04 15:31:34,018 - INFO - \u2713 Menu already exists in database: 5 items
+2026-04-04 15:31:34,018 - INFO - Services initialized successfully
+2026-04-04 15:31:34,032 - WARNING -  * Debugger is active!
+2026-04-04 15:31:34,036 - INFO -  * Debugger PIN: 128-822-270
+2026-04-04 15:32:20,271 - INFO - 127.0.0.1 - - [04/Apr/2026 15:32:20] "GET /health HTTP/1.1" 200 -
+2026-04-04 15:32:30,469 - INFO - 127.0.0.1 - - [04/Apr/2026 15:32:30] "GET /health HTTP/1.1" 200 -
+2026-04-04 15:32:38,524 - INFO - 127.0.0.1 - - [04/Apr/2026 15:32:38] "GET /api/menu HTTP/1.1" 200 -
+2026-04-04 15:32:46,422 - INFO - 127.0.0.1 - - [04/Apr/2026 15:32:46] "GET /api/menu HTTP/1.1" 200 -
+2026-04-04 15:32:55,045 - INFO - 127.0.0.1 - - [04/Apr/2026 15:32:55] "GET /api/admin/analytics HTTP/1.1" 200 -
+2026-04-04 15:33:09,562 - INFO -  * Detected change in 'P:\\CHATBOT\\test_flask_api.py', reloading
+2026-04-04 15:33:10,076 - INFO -  * Restarting with stat
+2026-04-04 15:33:13,485 - INFO - \u2713 MongoDB connection successful
+2026-04-04 15:33:15,233 - INFO - \u2713 Collections and indexes initialized
+2026-04-04 15:33:15,233 - INFO - \u2713 Connected to MongoDB Atlas
+2026-04-04 15:33:15,303 - INFO - Loaded 5 items from database
+2026-04-04 15:33:15,303 - INFO - Chatbot initialized
+2026-04-04 15:33:15,303 - INFO - \u2713 ChatbotEngine initialized
+2026-04-04 15:33:15,379 - INFO - \u2713 Menu already exists in database: 5 items
+2026-04-04 15:33:15,380 - INFO - Services initialized successfully
+2026-04-04 15:33:15,400 - WARNING -  * Debugger is active!
+2026-04-04 15:33:15,405 - INFO -  * Debugger PIN: 128-822-270
+2026-04-04 15:33:34,581 - INFO - 127.0.0.1 - - [04/Apr/2026 15:33:34] "GET /health HTTP/1.1" 200 -
+2026-04-04 15:33:37,249 - INFO - 127.0.0.1 - - [04/Apr/2026 15:33:37] "GET /api/menu HTTP/1.1" 200 -
+2026-04-04 15:33:39,369 - INFO - 127.0.0.1 - - [04/Apr/2026 15:33:39] "GET /api/menu/1 HTTP/1.1" 200 -
+2026-04-04 15:33:41,486 - INFO - 127.0.0.1 - - [04/Apr/2026 15:33:41] "GET /api/menu/category/Sweets HTTP/1.1" 200 -
+2026-04-04 15:33:43,901 - INFO - 127.0.0.1 - - [04/Apr/2026 15:33:43] "GET /api/admin/analytics HTTP/1.1" 200 -
+2026-04-04 15:33:45,948 - INFO - Webhook verified successfully
+2026-04-04 15:33:45,948 - INFO - 127.0.0.1 - - [04/Apr/2026 15:33:45] "GET /webhook?hub.mode=subscribe&hub.challenge=test_challenge_123&hub.verify_token=your_verify_token_here HTTP/1.1" 200 -
+2026-04-04 15:33:48,006 - INFO - Message from 916203454484: Hi
+2026-04-04 15:33:48,006 - INFO - New session created for 916203454484
+2026-04-04 15:33:48,215 - INFO - User 916203454484 - Intent: greeting, State: welcome
+2026-04-04 15:33:48,299 - INFO - Message sent to 916203454484: Welcome to Umesh Sweets!
+
+Location: 1329, Ara - Sa...
+2026-04-04 15:33:48,372 - INFO - 127.0.0.1 - - [04/Apr/2026 15:33:48] "POST /webhook HTTP/1.1" 200 -
+2026-04-04 15:35:38,335 - INFO - \u2713 MongoDB connection successful
+2026-04-04 15:35:39,459 - INFO - \u2713 Collections and indexes initialized
+2026-04-04 15:35:39,459 - INFO - \u2713 Connected to MongoDB Atlas
+2026-04-04 15:35:39,527 - INFO - Loaded 5 items from database
+2026-04-04 15:35:39,527 - INFO - Chatbot initialized
+2026-04-04 15:35:39,527 - INFO - \u2713 ChatbotEngine initialized
+2026-04-04 15:35:39,635 - INFO - \u2713 Menu already exists in database: 5 items
+2026-04-04 15:35:39,635 - INFO - Services initialized successfully
+2026-04-04 15:35:39,645 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.111.180.132:5000
+2026-04-04 15:35:39,645 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-04 15:36:04,443 - INFO - 127.0.0.1 - - [04/Apr/2026 15:36:04] "GET /api/admin/analytics HTTP/1.1" 200 -
+2026-04-04 15:36:04,519 - INFO - 127.0.0.1 - - [04/Apr/2026 15:36:04] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-04-04 15:36:18,451 - INFO - 127.0.0.1 - - [04/Apr/2026 15:36:18] "GET /health HTTP/1.1" 200 -
+2026-04-04 15:37:05,009 - INFO - 127.0.0.1 - - [04/Apr/2026 15:37:05] "GET /health HTTP/1.1" 200 -
+2026-04-04 15:37:06,313 - INFO - 127.0.0.1 - - [04/Apr/2026 15:37:06] "GET /api/menu HTTP/1.1" 200 -
+2026-04-04 15:37:10,248 - INFO - 127.0.0.1 - - [04/Apr/2026 15:37:10] "GET /api/admin/analytics HTTP/1.1" 200 -
+2026-04-04 16:00:19,447 - INFO - 127.0.0.1 - - [04/Apr/2026 16:00:19] "GET /health HTTP/1.1" 200 -
+2026-04-04 16:00:19,492 - INFO - 127.0.0.1 - - [04/Apr/2026 16:00:19] "[33mPOST /api/notifications/order-confirmation HTTP/1.1[0m" 404 -
+2026-04-04 16:01:42,932 - INFO - \u2713 MongoDB connection successful
+2026-04-04 16:01:44,186 - INFO - \u2713 Collections and indexes initialized
+2026-04-04 16:01:44,186 - INFO - \u2713 Connected to MongoDB Atlas
+2026-04-04 16:01:44,263 - INFO - Loaded 5 items from database
+2026-04-04 16:01:44,264 - INFO - Chatbot initialized
+2026-04-04 16:01:44,264 - INFO - \u2713 ChatbotEngine initialized
+2026-04-04 16:01:44,613 - INFO - \u2713 Menu already exists in database: 5 items
+2026-04-04 16:01:44,613 - INFO - \u2713 Twilio WhatsApp service initialized
+2026-04-04 16:01:44,613 - INFO -   Twilio Number: +14155238886
+2026-04-04 16:01:44,613 - INFO - \u2713 Twilio WhatsApp initialized
+2026-04-04 16:01:44,613 - INFO - Services initialized successfully
+2026-04-04 16:01:44,623 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.111.180.132:5000
+2026-04-04 16:01:44,623 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-04 16:02:31,694 - INFO - 127.0.0.1 - - [04/Apr/2026 16:02:31] "GET /health HTTP/1.1" 200 -
+2026-04-04 16:02:31,714 - INFO - 127.0.0.1 - - [04/Apr/2026 16:02:31] "[31m[1mPOST /api/notifications/order-confirmation HTTP/1.1[0m" 400 -
