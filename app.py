@@ -5,7 +5,7 @@ Supports both SQLite and MongoDB Atlas
 Includes Twilio WhatsApp notifications
 """
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import logging
 import os
 from typing import Dict, Optional
@@ -44,6 +44,7 @@ def init_services():
     try:
         # Get database type from environment
         db_type = os.getenv('DATABASE_TYPE', 'sqlite').lower()
+        db = None
         
         if db_type == 'mongodb':
             # Initialize MongoDB with proper credential handling
@@ -53,17 +54,25 @@ def init_services():
             mongo_db = os.getenv('MONGODB_DATABASE', 'Nirmla_sweets')
             
             if not all([mongo_user, mongo_pass, mongo_host]):
-                raise ValueError("Missing MongoDB credentials in environment variables")
-            
-            db = MongoDatabase(
-                username=mongo_user,
-                password=mongo_pass,
-                host=mongo_host,
-                database_name=mongo_db
-            )
-            logger.info("✓ Connected to MongoDB Atlas")
-        else:
-            # Initialize SQLite (default)
+                logger.warning("⚠ Missing MongoDB credentials, falling back to SQLite")
+                db = Database()
+                logger.info("✓ Connected to SQLite (fallback)")
+            else:
+                try:
+                    db = MongoDatabase(
+                        username=mongo_user,
+                        password=mongo_pass,
+                        host=mongo_host,
+                        database_name=mongo_db
+                    )
+                    logger.info("✓ Connected to MongoDB Atlas")
+                except Exception as mongo_error:
+                    logger.warning(f"⚠ MongoDB connection failed ({str(mongo_error)[:100]}), falling back to SQLite")
+                    db = Database()
+                    logger.info("✓ Connected to SQLite (fallback)")
+        
+        # Initialize SQLite as default or fallback
+        if db is None:
             db = Database()
             logger.info("✓ Connected to SQLite")
         
@@ -496,6 +505,67 @@ def health_check():
         "service": "Nirmla Sweets Chatbot",
         "version": "2.0"
     }), 200
+
+
+# ==================== WEB INTERFACE ====================
+
+@app.route('/', methods=['GET'])
+def index():
+    """Serve main website"""
+    try:
+        return send_from_directory(os.path.join(os.path.dirname(__file__), 'static'), 'index.html')
+    except:
+        # Fallback if static file not found
+        return jsonify({
+            "status": "success",
+            "message": "Umesh Sweets Chatbot is LIVE!",
+            "api": "Try POST /api/chat"
+        }), 200
+
+
+# ==================== CHAT API ====================
+
+@app.route('/api/chat', methods=['POST'])
+def chat_api():
+    """Web chat endpoint for website users"""
+    try:
+        data = request.json
+        message = data.get('message', '').strip()
+        phone = data.get('phone', '0000000000')
+        
+        if not message:
+            return jsonify({
+                "status": "error",
+                "message": "Message cannot be empty"
+            }), 400
+        
+        # Get or create user session
+        user_session = chatbot.get_or_create_session(phone)
+        
+        # Get chatbot response
+        response = chatbot.handle_message(message, phone)
+        
+        # Log the interaction
+        if db:
+            db.log_audit(
+                phone_number=phone,
+                action="web_chat",
+                details=f"Message: {message[:100]}"
+            )
+        
+        return jsonify({
+            "status": "success",
+            "response": response,
+            "phone": phone,
+            "timestamp": user_session.created_at.isoformat() if user_session.created_at else None
+        }), 200
+        
+    except Exception as e:
+        logger.error(f"Chat API error: {str(e)}")
+        return jsonify({
+            "status": "error",
+            "message": f"Error processing chat: {str(e)}"
+        }), 500
 
 
 # ==================== ERROR HANDLERS ====================
