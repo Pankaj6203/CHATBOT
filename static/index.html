@@ -64,6 +64,23 @@
             font-family: 'Playfair Display', serif;
         }
 
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
         .nav-contact {
             display: flex;
             align-items: center;
@@ -325,6 +342,7 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
             .nav-contact .phone-link { display: none; }
+            .nav-links { display: none; }
             .hero-buttons { flex-direction: column; }
             .floating-wa span { display: none; }
             .floating-wa { padding: 18px; border-radius: 50%; bottom: 25px; right: 25px; }
@@ -336,7 +354,12 @@
 
     <!-- Navbar -->
     <nav class="navbar">
-        <a href="#" class="logo">Nirmla Sweets</a>
+        <a href="/" class="logo">Nirmla Sweets</a>
+        <div class="nav-links">
+            <a href="/" class="active">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact</a>
+        </div>
         <div class="nav-contact">
             <a href="tel:+91123456789" class="phone-link">
                 ☎ +91 111 345 4444
