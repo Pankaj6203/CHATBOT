@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Umesh Sweets - Order Online</title>
+    <title>Nirmla Sweets | Authentic Indian Sweets in Bikramganj</title>
+    
+    <!-- Google Fonts for Professional Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --primary: #d35400;      /* Deep Saffron / Sweet Orange */
+            --primary-dark: #b84a00;
+            --text-dark: #2c3e50;    /* Charcoal */
+            --text-muted: #596a7a;
+            --bg-body: #fbf9f6;      /* Off-white Cream */
+            --white: #ffffff;
+            --border-radius: 12px;
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,566 +31,434 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
+        h1, h2, h3, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ----- Navbar ----- */
+        .navbar {
+            background-color: var(--white);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-contact {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .phone-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-order {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-order:hover {
+            background-color: transparent;
+            color: var(--primary);
+        }
+
+        /* ----- Hero Section ----- */
+        .hero {
+            padding: 100px 5% 80px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            color: var(--text-dark);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* ----- Features Section ----- */
+        .features {
+            padding: 80px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            text-align: center;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Header */
-        .header {
+        .feature-card {
+            padding: 40px 20px;
+            border-radius: var(--border-radius);
+            background: var(--white);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* ----- Highlight Menu Section ----- */
+        .menu-highlights {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
             text-align: center;
-            color: white;
-            padding: 40px 0 20px;
-            animation: slideDown 0.8s ease;
+            margin-bottom: 60px;
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .status-badge {
-            display: inline-block;
-            background: #4ade80;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-top: 10px;
-            font-weight: bold;
-            animation: pulse 2s infinite;
-        }
-
-        /* Main Content */
-        .content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        /* Chat Box */
-        .chat-section {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            animation: slideLeft 0.8s ease;
-        }
-
-        .chat-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            font-size: 1.3em;
-            font-weight: bold;
-        }
-
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            height: 400px;
-            background: #f5f5f5;
-        }
-
-        .message {
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--text-dark);
             margin-bottom: 15px;
-            animation: fadeIn 0.5s ease;
         }
 
-        .message.bot {
-            text-align: left;
-        }
-
-        .message.user {
-            text-align: right;
-        }
-
-        .message-text {
-            display: inline-block;
-            padding: 10px 15px;
-            border-radius: 10px;
-            max-width: 70%;
-            word-wrap: break-word;
-        }
-
-        .message.bot .message-text {
-            background: #e9ecef;
-            color: #333;
-            border-bottom-left-radius: 2px;
-        }
-
-        .message.user .message-text {
-            background: #667eea;
-            color: white;
-            border-bottom-right-radius: 2px;
-        }
-
-        .chat-input-area {
-            padding: 15px;
-            border-top: 1px solid #ddd;
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.95em;
-            resize: none;
-            max-height: 60px;
-        }
-
-        .send-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
-
-        .send-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .send-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Info Section */
-        .info-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            animation: slideRight 0.8s ease;
-        }
-
-        .info-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-
-        .info-card h2 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3em;
-        }
-
-        .info-card p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 10px 0;
-            font-size: 0.95em;
-        }
-
-        .contact-item strong {
-            color: #333;
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
         }
 
         .menu-item {
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 0.9em;
-            color: #555;
-            border-left: 3px solid #667eea;
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,0.03);
+            transition: var(--transition);
         }
 
-        /* Statistics */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 20px;
+        .menu-item:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
         }
 
-        .stat-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
+        .item-details h4 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
         }
 
-        .stat-box .number {
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 5px;
+        .item-details p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
-        .stat-box .label {
-            font-size: 0.9em;
-            opacity: 0.9;
+        .item-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Inter', sans-serif;
         }
 
-        /* Footer */
+        /* ----- Footer ----- */
         .footer {
-            text-align: center;
-            color: white;
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 80px 5% 40px;
             margin-top: 40px;
-            padding: 20px;
-            opacity: 0.8;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 50px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--white);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .footer h4 {
+            font-size: 1.25rem;
+            margin-bottom: 24px;
+            color: var(--primary);
+        }
+
+        .footer p {
+            color: #a0aec0;
+            margin-bottom: 14px;
+            font-size: 1rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+
+        /* ----- Floating WhatsApp Button ----- */
+        .floating-wa {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25D366;
+            color: white;
+            padding: 16px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.35);
+            transition: var(--transition);
+            z-index: 1000;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+        }
+
+        .floating-wa:hover {
+            transform: translateY(-5px);
+            background-color: #20ba5c;
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+        }
+
+        .floating-wa svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
         }
 
         /* Animations */
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.7;
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .content {
-                grid-template-columns: 1fr;
-            }
-
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .chat-messages {
-                height: 300px;
-            }
-        }
-
-        .loading {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #667eea;
-            border-radius: 50%;
-            margin: 0 3px;
-            animation: loading 1.4s infinite;
-        }
-
-        @keyframes loading {
-            0%, 80%, 100% {
-                opacity: 0.2;
-            }
-            40% {
-                opacity: 1;
-            }
-        }
-
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 15px;
-            width: 100%;
-            font-size: 0.95em;
-            transition: background 0.3s;
-        }
-
-        .whatsapp-btn:hover {
-            background: #20BA5F;
+            .hero h1 { font-size: 3rem; }
+            .nav-contact .phone-link { display: none; }
+            .hero-buttons { flex-direction: column; }
+            .floating-wa span { display: none; }
+            .floating-wa { padding: 18px; border-radius: 50%; bottom: 25px; right: 25px; }
+            .floating-wa svg { margin: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>🍬 Umesh Sweets</h1>
-            <p>Bikramganj - Order Online & Get Delivery</p>
-            <div class="status-badge">● LIVE & ONLINE</div>
-        </div>
 
-        <!-- Main Content -->
-        <div class="content">
-            <!-- Chat Section -->
-            <div class="chat-section">
-                <div class="chat-header">💬 Chat with Bot</div>
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message bot">
-                        <div class="message-text">Namaste! 👋 Welcome to Umesh Sweets! How can I help you today?</div>
-                    </div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">Nirmla Sweets</a>
+        <div class="nav-contact">
+            <a href="tel:+91123456789" class="phone-link">
+                ☎ +91 620 345 4484
+            </a>
+            <a href="https://wa.me/14155238886?text=Hi" class="btn-order" target="_blank">Order on WhatsApp</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Taste the Tradition of<br><span>Authentic Indian Sweets</span></h1>
+        <p>Handcrafted daily with premium ingredients, pure desi ghee, and decades of love. Experience the finest sweets of Bikramganj, ordered easily from our automated WhatsApp service.</p>
+        <div class="hero-buttons">
+            <a href="https://wa.me/14155238886?text=Hi" class="btn-order" style="padding: 16px 36px; font-size: 1.15rem;" target="_blank">
+                Order via WhatsApp Bot
+            </a>
+        </div>
+    </header>
+
+    <!-- Value Proposition -->
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-icon">🌿</div>
+            <h3>Premium Ingredients</h3>
+            <p>Made with 100% pure desi ghee, rich fresh milk, and hand-picked dry fruits to ensure uncompromising quality.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">✨</div>
+            <h3>Made Fresh Daily</h3>
+            <p>We prepare our signature Sweets entirely fresh every single morning, preserving authentic textures and flavors.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🤖</div>
+            <h3>Smart Ordering</h3>
+            <p>Our advanced 24/7 AI-powered WhatsApp Chatbot allows you to interact, view the menu, and place an order in seconds.</p>
+        </div>
+    </section>
+
+    <!-- Menu Highlights -->
+    <section class="menu-highlights">
+        <div class="section-header">
+            <h2>Our Signature Delicacies</h2>
+            <p>A glimpse into our premium, hand-crafted menu.</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="item-details">
+                    <h4>Royal Gulab Jamun</h4>
+                    <p>Soft, melt-in-the-mouth perfection.</p>
                 </div>
-                <div class="chat-input-area">
-                    <input 
-                        type="text" 
-                        id="chatInput" 
-                        class="chat-input" 
-                        placeholder="Type your message... (e.g., menu, hi)" 
-                        onkeypress="handleKeyPress(event)"
-                    >
-                    <button class="send-btn" onclick="sendMessage()">Send</button>
-                </div>
+                <div class="item-price">₹50</div>
             </div>
-
-            <!-- Info Section -->
-            <div class="info-section">
-                <!-- Contact Card -->
-                <div class="info-card">
-                    <h2>📍 Contact Us</h2>
-                    <div class="contact-item">
-                        <strong>📞 Phone:</strong>
-                        <span>+91 620-345-4484</span>
-                    </div>
-                    <div class="contact-item">
-                        <strong>📧 WhatsApp:</strong>
-                        <span>+1-415-523-8886 (Bot)</span>
-                    </div>
-                    <div class="contact-item">
-                        <strong>📍 Location:</strong>
-                        <span>Bikramganj, Bihar</span>
-                    </div>
-                    <button class="whatsapp-btn" onclick="openWhatsApp()">
-                        💚 Order on WhatsApp
-                    </button>
+            <div class="menu-item">
+                <div class="item-details">
+                    <h4>Classic Rasgulla</h4>
+                    <p>Spongy, syrupy Bengali classic.</p>
                 </div>
-
-                <!-- Popular Menu -->
-                <div class="info-card">
-                    <h2>🍤 Popular Items</h2>
-                    <div class="menu-grid">
-                        <div class="menu-item">🍬 Gulab Jamun - ₹50</div>
-                        <div class="menu-item">🍪 Rasgulla - ₹40</div>
-                        <div class="menu-item">🥧 Jalebi - ₹60</div>
-                        <div class="menu-item">🍰 Barfi - ₹45</div>
-                        <div class="menu-item">🍫 Motichoor - ₹55</div>
-                        <div class="menu-item">🍶 Kheer - ₹30</div>
-                    </div>
+                <div class="item-price">₹40</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-details">
+                    <h4>Kesar Kaju Barfi</h4>
+                    <p>Rich cashews infused with premium saffron.</p>
                 </div>
-
-                <!-- Statistics -->
-                <div class="stats">
-                    <div class="stat-box">
-                        <div class="number">100+</div>
-                        <div class="label">Orders Today</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="number">4.8★</div>
-                        <div class="label">Rating</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="number">24/7</div>
-                        <div class="label">Support</div>
-                    </div>
+                <div class="item-price">₹45</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-details">
+                    <h4>Desi Ghee Jalebi</h4>
+                    <p>Crispy, golden, and deeply satisfying.</p>
                 </div>
+                <div class="item-price">₹60</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-details">
+                    <h4>Motichoor Ladoo</h4>
+                    <p>Fine gram flour pearls bound in pure ghee.</p>
+                </div>
+                <div class="item-price">₹55</div>
+            </div>
+            <div class="menu-item">
+                <div class="item-details">
+                    <h4>Malai Peda</h4>
+                    <p>Creamy, delicate milk sweets.</p>
+                </div>
+                <div class="item-price">₹40</div>
             </div>
         </div>
+    </section>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>✨ Fresh sweets delivered to your doorstep | Powered by AI Chatbot</p>
-            <p style="font-size: 0.85em; margin-top: 10px;">🔒 Secure Payments | 🚚 Fast Delivery | 😊 100% Satisfaction</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div>
+                <span class="footer-logo">Nirmla Sweets</span>
+                <p>Bringing sweetness to every occasion since establishment. Committed to absolute purity and unmatched taste in Bikramganj, Bihar.</p>
+            </div>
+            <div>
+                <h4>Contact Us</h4>
+                <p>📍 Shop No. 1, Main Market</p>
+                <p>Bikramganj, Bihar</p>
+                <p>📞 +91 620-345-4484</p>
+                <p>🟢 WhatsApp Order: +1 (415) 523-8886</p>
+            </div>
+            <div>
+                <h4>Opening Hours</h4>
+                <p>Monday - Sunday: 8:00 AM - 10:00 PM</p>
+                <p>Online WhatsApp AI Support: 24/7</p>
+            </div>
         </div>
-    </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Nirmla Sweets. All rights reserved. Powered by AI Automation Framework.</p>
+        </div>
+    </footer>
 
-    <script>
-        // Phone number for WhatsApp (Twilio sandbox)
-        const WHATSAPP_NUMBER = '14155238886';
-        const API_BASE = window.location.origin;
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/14155238886?text=Hi" class="floating-wa" target="_blank" aria-label="Order on WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+        </svg>
+        <span>Order Now</span>
+    </a>
 
-        // Load chat history from localStorage
-        function loadChatHistory() {
-            const history = localStorage.getItem('chatHistory');
-            if (history) {
-                document.getElementById('chatMessages').innerHTML = history;
-                scrollToBottom();
-            }
-        }
-
-        // Save chat history to localStorage
-        function saveChatHistory() {
-            const history = document.getElementById('chatMessages').innerHTML;
-            localStorage.setItem('chatHistory', history);
-        }
-
-        // Send message
-        async function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-
-            if (!message) return;
-
-            // Add user message to chat
-            addMessage(message, 'user');
-            input.value = '';
-
-            // Show loading indicator
-            const loadingId = addMessage('<span class="loading"></span><span class="loading"></span><span class="loading"></span>', 'bot');
-
-            try {
-                // Get user phone
-                const phone = prompt('Enter your phone number (for order tracking):', '6203454484');
-                if (!phone) return;
-
-                // Send to chatbot API
-                const response = await fetch(`${API_BASE}/api/chat`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        phone: phone
-                    })
-                });
-
-                if (!response.ok) throw new Error('API error');
-                const data = await response.json();
-
-                // Remove loading indicator
-                const chatDiv = document.getElementById('chatMessages');
-                const loadingElem = chatDiv.querySelector('[data-id="' + loadingId + '"]');
-                if (loadingElem) loadingElem.remove();
-
-                // Add bot response
-                addMessage(data.response || 'Sorry, I could not process your request.', 'bot');
-            } catch (error) {
-                console.error('Error:', error);
-                const chatDiv = document.getElementById('chatMessages');
-                const loadingElem = chatDiv.querySelector('[data-id="' + loadingId + '"]');
-                if (loadingElem) loadingElem.remove();
-                addMessage('Sorry, I am currently offline. Please order via WhatsApp! 📱', 'bot');
-            }
-
-            saveChatHistory();
-        }
-
-        // Add message to chat
-        function addMessage(text, sender) {
-            const messagesDiv = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            messageDiv.innerHTML = `<div class="message-text">${text}</div>`;
-            const id = Date.now();
-            messageDiv.setAttribute('data-id', id);
-            messagesDiv.appendChild(messageDiv);
-            scrollToBottom();
-            return id;
-        }
-
-        // Scroll to bottom
-        function scrollToBottom() {
-            const messagesDiv = document.getElementById('chatMessages');
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
-
-        // Handle Enter key
-        function handleKeyPress(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                sendMessage();
-            }
-        }
-
-        // Open WhatsApp
-        function openWhatsApp() {
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=Hi, I want to order sweets from Umesh Sweets`, '_blank');
-        }
-
-        // Load chat history on page load
-        window.addEventListener('load', () => {
-            loadChatHistory();
-            addMessage('Try saying "menu" or "hello" to get started! 😊', 'bot');
-            saveChatHistory();
-        });
-
-        // Check server health
-        async function checkHealth() {
-            try {
-                const response = await fetch(`${API_BASE}/health`);
-                const data = await response.json();
-                console.log('Server status:', data.status);
-            } catch (error) {
-                console.log('Server might be offline');
-            }
-        }
-
-        checkHealth();
-    </script>
 </body>
 </html>
