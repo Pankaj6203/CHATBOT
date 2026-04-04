@@ -1,10 +1,10 @@
-# ✓ UMESH SWEETS CHATBOT - PRODUCTION READY
+# ✓ Nirmla SWEETS CHATBOT - PRODUCTION READY
 
 ## 🎉 System Status: LIVE & OPERATIONAL
 
 ```
 ✓ Flask Server Running (http://localhost:5000)
-✓ MongoDB Atlas Connected (umesh_sweets cluster)
+✓ MongoDB Atlas Connected (Nirmla_sweets cluster)
 ✓ All API Endpoints Responding (7/7 tested)
 ✓ Database Persisting Orders & Menu
 ✓ WhatsApp Webhook Ready
@@ -36,7 +36,7 @@ curl http://localhost:5000/api/admin/analytics
 # Health Status (TEST)
 Status: 200 OK
 Response: {
-  "service": "Umesh Sweets Chatbot",
+  "service": "Nirmla Sweets Chatbot",
   "status": "healthy",
   "version": "2.0"
 }
@@ -47,7 +47,7 @@ Response: {
 ## 📊 Current Data in MongoDB
 
 **Restaurant:**
-- Name: Umesh Sweets
+- Name: Nirmla Sweets
 - Location: 1329, Ara - Sasaram Rd, Bikramganj, Bihar 802212
 - Phone: +6203454484
 
@@ -350,7 +350,7 @@ Your restaurant chatbot system is **complete and production-ready**.
 - Minimal setup needed (get WhatsApp token + URL)
 - Can be live with customers in ~30 minutes
 
-**Let's make Umesh Sweets digital! 🚀**
+**Let's make Nirmla Sweets digital! 🚀**
 
 ---
 

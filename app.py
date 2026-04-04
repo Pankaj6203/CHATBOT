@@ -50,7 +50,7 @@ def init_services():
             mongo_user = os.getenv('MONGODB_USERNAME')
             mongo_pass = os.getenv('MONGODB_PASSWORD')
             mongo_host = os.getenv('MONGODB_HOST')
-            mongo_db = os.getenv('MONGODB_DATABASE', 'umesh_sweets')
+            mongo_db = os.getenv('MONGODB_DATABASE', 'Nirmla_sweets')
             
             if not all([mongo_user, mongo_pass, mongo_host]):
                 raise ValueError("Missing MongoDB credentials in environment variables")
@@ -493,7 +493,7 @@ def health_check():
     """Health check endpoint"""
     return jsonify({
         "status": "healthy",
-        "service": "Umesh Sweets Chatbot",
+        "service": "Nirmla Sweets Chatbot",
         "version": "2.0"
     }), 200
 
@@ -517,7 +517,7 @@ if __name__ == "__main__":
     init_services()
     
     print("="*70)
-    print("UMESH SWEETS - FLASK CHATBOT SERVER")
+    print("Nirmla SWEETS - FLASK CHATBOT SERVER")
     print("="*70)
     print("\nEndpoints:")
     print("  Webhook: POST /webhook")
@@ -538,9 +538,11 @@ if __name__ == "__main__":
     print()
     print("  Health: GET /health")
     print()
-    print("Starting server on http://localhost:5000")
+    # Get port from environment (Render sets PORT), default to 5000 for local
+    port = int(os.getenv("PORT", 5000))
+    print(f"Starting server on http://localhost:{port}")
     print("="*70 + "\n")
     
     # Run Flask app
     # Note: debug=False for Windows compatibility (avoids socket reload issues)
-    app.run(debug=False, host='0.0.0.0', port=5000, use_reloader=False)
+    app.run(debug=False, host='0.0.0.0', port=port, use_reloader=False)

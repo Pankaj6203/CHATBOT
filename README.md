@@ -1,4 +1,4 @@
-# 🍬 Umesh Sweets - Production-Grade Restaurant Chatbot
+# 🍬 Nirmla Sweets - Production-Grade Restaurant Chatbot
 
 A **senior-level WhatsApp restaurant chatbot** with Flask integration, SQLite database, and enterprise architecture.
 
@@ -75,7 +75,7 @@ python chatbot.py
 
 Example conversation:
 ```
-Bot: Welcome to Umesh Sweets!
+Bot: Welcome to Nirmla Sweets!
      [Menu displayed]
 
 You: 1
@@ -361,7 +361,7 @@ CMD ["python", "app.py"]
 
 ### Heroku
 ```bash
-heroku create umesh-sweets-bot
+heroku create Nirmla-sweets-bot
 git push heroku main
 heroku config:set WHATSAPP_TOKEN=xxx
 ```
@@ -420,7 +420,7 @@ To add new features:
 
 ## 📞 Support
 
-**Restaurant:** Umesh Sweets
+**Restaurant:** Nirmla Sweets
 - **Phone:** 6203454484
 - **Address:** 1329, Ara - Sasaram Rd, Bikramganj, Bihar 802212
 
@@ -430,5 +430,5 @@ Production-ready code for restaurant use.
 
 ---
 
-**Built with ❤️ for Umesh Sweets Restaurant**  
+**Built with ❤️ for Nirmla Sweets Restaurant**  
 Senior Backend Developer Edition - April 2026

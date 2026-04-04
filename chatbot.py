@@ -252,7 +252,7 @@ class MenuManager:
         if not items:
             return "No items available in this category."
         
-        menu_display = "UMESH SWEETS MENU\n" + "="*60 + "\n"
+        menu_display = "Nirmla SWEETS MENU\n" + "="*60 + "\n"
         
         categories = {}
         for item in items:
@@ -369,7 +369,7 @@ class ChatbotEngine:
         """Handle greeting"""
         session.state = UserState.MENU
         return (
-            "Welcome to Umesh Sweets!\n\n"
+            "Welcome to Nirmla Sweets!\n\n"
             "Location: 1329, Ara - Sasaram Rd, Bikramganj\n"
             "Phone: 6203454484\n\n"
             + self.menu_manager.get_formatted_menu()
@@ -506,7 +506,7 @@ def main():
     phone_number = "+916203454484"
     
     print("="*70)
-    print("UMESH SWEETS RESTAURANT CHATBOT")
+    print("Nirmla SWEETS RESTAURANT CHATBOT")
     print("="*70)
     print(f"\nPhone: {phone_number}{db_msg}")
     print(f"Menu items: {len(chatbot.menu_manager.items)}")

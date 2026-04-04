@@ -35,7 +35,7 @@ try:
     
     result = whatsapp.send_message(
         YOUR_PHONE,
-        "👋 UMESH SWEETS TEST MESSAGE\n\nHello! This is a test message from your chatbot.\n\nReply with 'hi' to start ordering! 🍪"
+        "👋 Nirmla SWEETS TEST MESSAGE\n\nHello! This is a test message from your chatbot.\n\nReply with 'hi' to start ordering! 🍪"
     )
     
     if result["status"] == "sent":

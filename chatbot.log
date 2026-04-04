@@ -106,7 +106,7 @@
 2026-04-04 15:33:48,006 - INFO - Message from 916203454484: Hi
 2026-04-04 15:33:48,006 - INFO - New session created for 916203454484
 2026-04-04 15:33:48,215 - INFO - User 916203454484 - Intent: greeting, State: welcome
-2026-04-04 15:33:48,299 - INFO - Message sent to 916203454484: Welcome to Umesh Sweets!
+2026-04-04 15:33:48,299 - INFO - Message sent to 916203454484: Welcome to Nirmla Sweets!
 
 Location: 1329, Ara - Sa...
 2026-04-04 15:33:48,372 - INFO - 127.0.0.1 - - [04/Apr/2026 15:33:48] "POST /webhook HTTP/1.1" 200 -
@@ -149,3 +149,72 @@ Location: 1329, Ara - Sa...
 2026-04-04 16:01:44,623 - INFO - [33mPress CTRL+C to quit[0m
 2026-04-04 16:02:31,694 - INFO - 127.0.0.1 - - [04/Apr/2026 16:02:31] "GET /health HTTP/1.1" 200 -
 2026-04-04 16:02:31,714 - INFO - 127.0.0.1 - - [04/Apr/2026 16:02:31] "[31m[1mPOST /api/notifications/order-confirmation HTTP/1.1[0m" 400 -
+2026-04-04 16:06:32,101 - INFO - \u2713 MongoDB connection successful
+2026-04-04 16:06:33,789 - INFO - \u2713 Collections and indexes initialized
+2026-04-04 16:06:33,789 - INFO - \u2713 Connected to MongoDB Atlas
+2026-04-04 16:06:33,886 - INFO - Loaded 5 items from database
+2026-04-04 16:06:33,887 - INFO - Chatbot initialized
+2026-04-04 16:06:33,887 - INFO - \u2713 ChatbotEngine initialized
+2026-04-04 16:06:33,970 - INFO - \u2713 Menu already exists in database: 5 items
+2026-04-04 16:06:33,970 - INFO - \u2713 Twilio WhatsApp service initialized
+2026-04-04 16:06:33,970 - INFO -   Twilio Number: +14155238886
+2026-04-04 16:06:33,970 - INFO - \u2713 Twilio WhatsApp initialized
+2026-04-04 16:06:33,970 - INFO - Services initialized successfully
+2026-04-04 16:06:33,981 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.111.180.132:5000
+2026-04-04 16:06:33,981 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-04 16:07:38,819 - INFO - 127.0.0.1 - - [04/Apr/2026 16:07:38] "GET /health HTTP/1.1" 200 -
+2026-04-04 16:07:39,077 - INFO - -- BEGIN Twilio API Request --
+2026-04-04 16:07:39,078 - INFO - POST Request: https://api.twilio.com/2010-04-01/Accounts/AC02c43388674e1a6e2f47b5c3d818842fc/Messages.json
+2026-04-04 16:07:39,078 - INFO - Headers:
+2026-04-04 16:07:39,078 - INFO - Content-Type : application/x-www-form-urlencoded
+2026-04-04 16:07:39,078 - INFO - Accept : application/json
+2026-04-04 16:07:39,078 - INFO - User-Agent : twilio-python/9.10.4 (Windows AMD64) Python/3.13.4
+2026-04-04 16:07:39,078 - INFO - X-Twilio-Client : python-9.10.4
+2026-04-04 16:07:39,078 - INFO - Accept-Charset : utf-8
+2026-04-04 16:07:39,078 - INFO - -- END Twilio API Request --
+2026-04-04 16:07:40,740 - INFO - Response Status Code: 401
+2026-04-04 16:07:40,740 - INFO - Response Headers: {'Content-Type': 'application/json', 'Content-Length': '134', 'Connection': 'keep-alive', 'Date': 'Sat, 04 Apr 2026 10:37:41 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ659ef2a7b78cd48efa956d0d73f38ac6', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 113586aff60f3c84eab3bd5cbfca1bda.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'd_DV8JbnWQUh815YJFSbPq4IyUu19vP1vosqzIGvZ7AeodxreTytbQ==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+2026-04-04 16:07:40,740 - ERROR - \u2717 Failed to send message to +916203454484: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC02c43388674e1a6e2f47b5c3d818842fc/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authentication Error - invalid username[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+2026-04-04 16:07:40,741 - INFO - 127.0.0.1 - - [04/Apr/2026 16:07:40] "POST /api/notifications/order-confirmation HTTP/1.1" 200 -
+2026-04-04 16:07:40,762 - INFO - -- BEGIN Twilio API Request --
+2026-04-04 16:07:40,762 - INFO - POST Request: https://api.twilio.com/2010-04-01/Accounts/AC02c43388674e1a6e2f47b5c3d818842fc/Messages.json
+2026-04-04 16:07:40,762 - INFO - Headers:
+2026-04-04 16:07:40,762 - INFO - Content-Type : application/x-www-form-urlencoded
+2026-04-04 16:07:40,762 - INFO - Accept : application/json
+2026-04-04 16:07:40,762 - INFO - User-Agent : twilio-python/9.10.4 (Windows AMD64) Python/3.13.4
+2026-04-04 16:07:40,762 - INFO - X-Twilio-Client : python-9.10.4
+2026-04-04 16:07:40,762 - INFO - Accept-Charset : utf-8
+2026-04-04 16:07:40,762 - INFO - -- END Twilio API Request --
+2026-04-04 16:07:41,353 - INFO - Response Status Code: 401
+2026-04-04 16:07:41,354 - INFO - Response Headers: {'Content-Type': 'application/json', 'Content-Length': '134', 'Connection': 'keep-alive', 'Date': 'Sat, 04 Apr 2026 10:37:41 GMT', 'X-Twilio-Error-Code': '20003', 'Twilio-Request-Id': 'RQ7cc75c44a4fe9b96f0d91f30b88723e6', 'Twilio-Request-Duration': '0.008', 'X-Home-Region': 'us1', 'X-API-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'WWW-Authenticate': 'Basic realm="Twilio API"', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 113586aff60f3c84eab3bd5cbfca1bda.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'XnvrZhuNcIuMuyKNA--lic7FUp27Z3F8sVt8y0CP1QNNWw__maOSiA==', 'X-Powered-By': 'AT-5000', 'X-Shenanigans': 'none', 'Vary': 'Origin'}
+2026-04-04 16:07:41,354 - ERROR - \u2717 Failed to send message to +916203454484: 
+[31m[49mHTTP Error[0m [37m[49mYour request was:[0m
+
+[36m[49mPOST /Accounts/AC02c43388674e1a6e2f47b5c3d818842fc/Messages.json[0m
+
+[37m[49mTwilio returned the following information:[0m
+
+[34m[49mUnable to create record: Authentication Error - invalid username[0m
+
+[37m[49mMore information may be available here:[0m
+
+[34m[49mhttps://www.twilio.com/docs/errors/20003[0m
+
+
+2026-04-04 16:07:41,354 - INFO - 127.0.0.1 - - [04/Apr/2026 16:07:41] "POST /api/notifications/menu HTTP/1.1" 200 -

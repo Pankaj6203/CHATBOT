@@ -21,7 +21,7 @@ Your Flask chatbot server is now **live and fully operational** with MongoDB Atl
 GET http://localhost:5000/health
 Status: 200 OK
 {
-  "service": "Umesh Sweets Chatbot",
+  "service": "Nirmla Sweets Chatbot",
   "status": "healthy",
   "version": "2.0"
 }
@@ -291,7 +291,7 @@ WhatsApp Business API
 MONGODB_USERNAME=pankaj_db_user
 MONGODB_PASSWORD=Pr09d@9664
 MONGODB_HOST=cluster0.uy7xu4q.mongodb.net
-MONGODB_DATABASE=umesh_sweets
+MONGODB_DATABASE=Nirmla_sweets
 DATABASE_TYPE=mongodb
 
 WHATSAPP_VERIFY_TOKEN=your_token

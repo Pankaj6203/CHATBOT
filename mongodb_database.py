@@ -1,5 +1,5 @@
 """
-MongoDB database layer for Umesh Sweets restaurant chatbot
+MongoDB database layer for Nirmla Sweets restaurant chatbot
 Uses MongoDB Atlas cloud database
 """
 
@@ -19,7 +19,7 @@ class MongoDatabase:
     """MongoDB wrapper for restaurant chatbot data persistence"""
     
     def __init__(self, connection_string: str = None, username: str = None, password: str = None, 
-                 database_name: str = "umesh_sweets", host: str = None):
+                 database_name: str = "Nirmla_sweets", host: str = None):
         """
         Initialize MongoDB connection
         
@@ -27,7 +27,7 @@ class MongoDatabase:
             connection_string: MongoDB Atlas connection string (will be used as-is)
             username: MongoDB username (if not in connection_string)
             password: MongoDB password (will be URL-encoded)
-            database_name: Database name (default: umesh_sweets)
+            database_name: Database name (default: Nirmla_sweets)
             host: MongoDB host/cluster URL
         """
         try:

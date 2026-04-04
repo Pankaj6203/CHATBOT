@@ -22,7 +22,7 @@ POST /api/notifications/send
 
 Body: {
     "phone": "+916203454484",
-    "message": "Hello! Welcome to Umesh Sweets"
+    "message": "Hello! Welcome to Nirmla Sweets"
 }
 ```
 
@@ -120,7 +120,7 @@ Total: Rs 100.00
   • Gulab Jamun: 2x Rs 50
 
 ✅ Your order has been confirmed.
-Thank you for ordering from Umesh Sweets! 🙏
+Thank you for ordering from Nirmla Sweets! 🙏
 
 📍 Location: 1329, Ara - Sasaram Rd, Bikramganj
 📞 Contact: +6203454484
@@ -128,7 +128,7 @@ Thank you for ordering from Umesh Sweets! 🙏
 
 ### Menu Preview Message Example:
 ```
-🍪 UMESH SWEETS MENU
+🍪 Nirmla SWEETS MENU
 
 🍬 SWEETS:
   1. Gulab Jamun - Rs 50
@@ -243,7 +243,7 @@ Twilio Number: +14155238886
 
 ## 🎯 Summary
 
-Your Umesh Sweets chatbot now has:
+Your Nirmla Sweets chatbot now has:
 
 ✅ **Full WhatsApp Integration** via Twilio
 ✅ **5 Different Message Types** (order, delivery, menu, feedback, custom)

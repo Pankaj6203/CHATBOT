@@ -1,5 +1,5 @@
 """
-Twilio WhatsApp Integration for Umesh Sweets Chatbot
+Twilio WhatsApp Integration for Nirmla Sweets Chatbot
 Send/receive WhatsApp messages via Twilio
 """
 
@@ -102,7 +102,7 @@ Total: Rs {total:.2f}
             
             message_body += f"""
 ✅ Your order has been confirmed.
-Thank you for ordering from Umesh Sweets! 🙏
+Thank you for ordering from Nirmla Sweets! 🙏
 
 📍 Location: 1329, Ara - Sasaram Rd, Bikramganj
 📞 Contact: +6203454484
@@ -169,7 +169,7 @@ Thank you for your patience! 🙏
             Message delivery status
         """
         try:
-            message_body = """🍪 UMESH SWEETS MENU
+            message_body = """🍪 Nirmla SWEETS MENU
 
 🍬 SWEETS:
   1. Gulab Jamun - Rs 50

@@ -25,7 +25,7 @@ Your restaurant chatbot system is now fully integrated with **MongoDB Atlas** (c
 MONGODB_USERNAME=pankaj_db_user
 MONGODB_PASSWORD=Pr09d@9664
 MONGODB_HOST=cluster0.uy7xu4q.mongodb.net
-MONGODB_DATABASE=umesh_sweets
+MONGODB_DATABASE=Nirmla_sweets
 DATABASE_TYPE=mongodb
 
 # Other configs...
