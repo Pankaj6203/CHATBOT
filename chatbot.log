@@ -218,3 +218,25 @@ Location: 1329, Ara - Sa...
 
 
 2026-04-04 16:07:41,354 - INFO - 127.0.0.1 - - [04/Apr/2026 16:07:41] "POST /api/notifications/menu HTTP/1.1" 200 -
+2026-04-04 16:59:38,564 - INFO - \u2713 MongoDB connection successful
+2026-04-04 16:59:38,834 - INFO - Created collection: menu_items
+2026-04-04 16:59:39,097 - INFO - Created collection: users
+2026-04-04 16:59:39,338 - INFO - Created collection: orders
+2026-04-04 16:59:39,619 - INFO - Created collection: order_items
+2026-04-04 16:59:39,899 - INFO - Created collection: audit_log
+2026-04-04 16:59:40,641 - INFO - \u2713 Collections and indexes initialized
+2026-04-04 16:59:40,641 - INFO - \u2713 Connected to MongoDB Atlas
+2026-04-04 16:59:40,723 - INFO - Loaded 0 items from database
+2026-04-04 16:59:40,723 - INFO - Chatbot initialized
+2026-04-04 16:59:40,723 - INFO - \u2713 ChatbotEngine initialized
+2026-04-04 16:59:42,081 - INFO - Inserted 15 menu items
+2026-04-04 16:59:42,081 - INFO - \u2713 Inserted default menu: 15 items
+2026-04-04 16:59:42,081 - INFO - \u2713 Twilio WhatsApp service initialized
+2026-04-04 16:59:42,081 - INFO -   Twilio Number: +14155238886
+2026-04-04 16:59:42,081 - INFO - \u2713 Twilio WhatsApp initialized
+2026-04-04 16:59:42,081 - INFO - Services initialized successfully
+2026-04-04 16:59:42,092 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.111.180.132:5000
+2026-04-04 16:59:42,092 - INFO - [33mPress CTRL+C to quit[0m
