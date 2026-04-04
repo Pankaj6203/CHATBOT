@@ -140,17 +140,12 @@ class Cart:
         if self.is_empty():
             return "Your cart is empty!"
         
-        summary = "CART SUMMARY:\n" + "="*60 + "\n"
+        summary = "🛒 *CART SUMMARY:*\n" + "-"*20 + "\n"
         for cart_item in self.items.values():
-            summary += f"{cart_item.menu_item.name}\n"
-            summary += f"  {cart_item.quantity} x Rs {cart_item.menu_item.price} = Rs {cart_item.subtotal}\n"
-        summary += "="*60 + "\n"
-        summary += f"TOTAL: Rs {self.total:.2f}\n"
-        return summary
-
-    def clear(self):
-        """Clear all items from cart"""
-        self.items.clear()
+            summary += f"*{cart_item.menu_item.name}*\n"
+            summary += f"  _{cart_item.quantity}_ x Rs {cart_item.menu_item.price} = *Rs {cart_item.subtotal}*\n"
+        summary += "-"*20 + "\n"
+        summary += f"💰 *TOTAL: Rs {self.total:.2f}*\n"
 
 
 class UserSession:
@@ -270,9 +265,9 @@ class MenuManager:
 
     def get_formatted_categories(self) -> str:
         cats = self.get_categories()
-        res = "Please select a category by replying with its number:\n\n"
+        res = "🛍️ *Please select a category by replying with its number:*\n\n"
         for i, cat in enumerate(cats, 1):
-            res += f"{i}. {cat}\n"
+            res += f"*{i}.* {cat}\n"
         return res
 
     def get_formatted_menu_for_category(self, category_name: str) -> str:
@@ -280,20 +275,20 @@ class MenuManager:
         if not items:
             return "No items in this category."
             
-        res = f"--- {category_name} ---\nReply with the item number:\n\n"
+        res = f"🍽️ *--- {category_name} ---*\n_Reply with the item number:_\n\n"
         for item in items:
-            res += f"{item.item_id}. {item.name}\n"
+            res += f"*{item.item_id}.* {item.name} - *Rs {item.price}*\n"
             if item.description:
-                res += f"   {item.description}\n"
+                res += f"   _{item.description}_\n"
         return res
         
     def get_formatted_variants_for_item(self, item: MenuItem) -> str:
         if not item.variants:
-            return f"Selected {item.name} at Rs {item.price}.\nPlease enter quantity:"
+            return f"✅ Selected *{item.name}* at *Rs {item.price}*.\n_Please enter quantity:_"
             
-        res = f"Select size/variant for {item.name}:\n\n"
+        res = f"📏 *Select size/variant for {item.name}:*\n\n"
         for i, var in enumerate(item.variants, 1):
-            res += f"{i}. {var['name']} - Rs {var['price']}\n"
+            res += f"*{i}.* {var['name']} - *Rs {var['price']}*\n"
         return res
 
 class ChatbotEngine:
@@ -391,7 +386,7 @@ class ChatbotEngine:
 
     def _handle_greeting(self, session: UserSession) -> str:
         cats = self.menu_manager.get_formatted_categories()
-        return f"Welcome to Nirmla Sweets!\n\n{cats}"
+        return f"👋 *Welcome to Nirmla Sweets!*\n\n{cats}"
 
     def _handle_category_selection(self, session: UserSession, selection: str) -> str:
         items = self.menu_manager.get_by_category(selection)
@@ -468,28 +463,45 @@ class ChatbotEngine:
             
         total = session.cart.total
         
+        from datetime import datetime
+        now = datetime.now()
+        date_str = now.strftime("%d %b %Y")
+        time_str = now.strftime("%I:%M %p")
+        
+        items_str = ""
+        for item in session.cart.items.values():
+            items_str += f"▪ {item.name} x{item.quantity} (Rs {item.subtotal})\n"
+        
         # Save order to DB
         if self.db:
             try:
-                order_items = []
+                import time
+                import uuid
+                # Generate unique professional ID
+                order_id = f"ORD-{int(time.time())}-{str(uuid.uuid4())[:4].upper()}"
+                
+                # Create main order record
+                self.db.create_order(order_id, session.phone_number, total)
+                
+                # Add individual order items
                 for item in session.cart.items.values():
-                    order_items.append({
-                        "item_id": item.menu_item.item_id,
-                        "name": item.name,
-                        "quantity": item.quantity,
-                        "price": item.price,
-                        "subtotal": item.subtotal
-                    })
-                order_id = self.db.create_order(session.phone_number, order_items, total)
+                    self.db.add_order_item(
+                        order_id=order_id,
+                        item_id=item.menu_item.item_id,
+                        item_name=item.name,
+                        price=item.price,
+                        quantity=item.quantity,
+                        subtotal=item.subtotal
+                    )
                 
                 session.cart.clear()
                 session.state = UserState.ORDER_CONFIRMED
-                return f"Order placed successfully! Your order ID is #{order_id}.\nTotal amount: Rs {total}.\nWe will contact you shortly."
+                return f"✅ *Thank you for your order!*\n\n🏪 *Shop Name:* Nirmla Sweets\n📅 *Order Date:* {date_str}\n⏰ *Order Time:* {time_str}\n🔢 *Order Number:* `{order_id}`\n\n🛍️ *Order Items:*\n{items_str}\n💰 *Total Amount:* *Rs {total}*\n\nWe will contact you shortly regarding delivery."
             except Exception as e:
                 logging.error(f"Order creation failed: {e}")
-                return "Sorry, there was an error placing your order. Please try again."
+                return "❌ *Sorry, there was an error placing your order.* Please try again later."
         
         # Fallback if no DB
         session.cart.clear()
         session.state = UserState.ORDER_CONFIRMED
-        return f"Order confirmed!\nTotal amount: Rs {total}.\nThank you for choosing Nirmla Sweets!"
+        return f"✅ *Thank you for your order!*\n\n🏪 *Shop Name:* Nirmla Sweets\n📅 *Order Date:* {date_str}\n⏰ *Order Time:* {time_str}\n\n🛍️ *Order Items:*\n{items_str}\n💰 *Total Amount:* *Rs {total}*\n\nWe will contact you shortly regarding delivery."

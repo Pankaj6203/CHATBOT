@@ -256,3 +256,33 @@ Location: 1329, Ara - Sa...
  * Running on http://127.0.0.1:5000
  * Running on http://10.111.180.132:5000
 2026-04-04 17:25:20,653 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-04 19:57:13,648 - INFO - \u2713 MongoDB connection successful
+2026-04-04 19:57:15,507 - INFO - \u2713 Collections and indexes initialized
+2026-04-04 19:57:15,507 - INFO - \u2713 Connected to MongoDB Atlas
+2026-04-04 19:57:15,613 - INFO - Loaded 15 items from database
+2026-04-04 19:57:15,613 - INFO - Chatbot initialized
+2026-04-04 19:57:15,613 - INFO - \u2713 ChatbotEngine initialized
+2026-04-04 19:57:16,774 - INFO - Inserted 0 menu items
+2026-04-04 19:57:16,774 - INFO - \u2713 Loaded menu from JSON: 6 items
+2026-04-04 19:57:16,774 - INFO - \u2713 Twilio WhatsApp service initialized
+2026-04-04 19:57:16,774 - INFO -   Twilio Number: +14155238886
+2026-04-04 19:57:16,774 - INFO - \u2713 Twilio WhatsApp initialized
+2026-04-04 19:57:16,775 - INFO - Services initialized successfully
+2026-04-04 19:57:16,796 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.111.180.132:5000
+2026-04-04 19:57:16,797 - INFO - [33mPress CTRL+C to quit[0m
+2026-04-04 19:58:00,793 - ERROR - Error handling WhatsApp message: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-04-04 19:58:00,796 - INFO - 127.0.0.1 - - [04/Apr/2026 19:58:00] "[35m[1mPOST /webhook HTTP/1.1[0m" 500 -
+2026-04-04 19:58:53,613 - ERROR - Error handling WhatsApp message: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-04-04 19:58:53,613 - INFO - 127.0.0.1 - - [04/Apr/2026 19:58:53] "[35m[1mPOST /webhook HTTP/1.1[0m" 500 -
+2026-04-04 19:59:18,406 - ERROR - Error handling WhatsApp message: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-04-04 19:59:18,406 - INFO - 127.0.0.1 - - [04/Apr/2026 19:59:18] "[35m[1mPOST /webhook HTTP/1.1[0m" 500 -
+2026-04-04 20:00:57,395 - ERROR - Error handling WhatsApp message: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-04-04 20:00:57,396 - INFO - 127.0.0.1 - - [04/Apr/2026 20:00:57] "[35m[1mPOST /webhook HTTP/1.1[0m" 500 -
+2026-04-04 20:03:43,190 - ERROR - Error handling WhatsApp message: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-04-04 20:03:43,190 - INFO - 127.0.0.1 - - [04/Apr/2026 20:03:43] "[35m[1mPOST /webhook HTTP/1.1[0m" 500 -
+2026-04-04 20:06:58,948 - INFO - 127.0.0.1 - - [04/Apr/2026 20:06:58] "GET /health HTTP/1.1" 200 -
+2026-04-04 20:07:50,019 - ERROR - Error handling WhatsApp message: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
+2026-04-04 20:07:50,019 - INFO - 127.0.0.1 - - [04/Apr/2026 20:07:50] "[35m[1mPOST /webhook HTTP/1.1[0m" 500 -
