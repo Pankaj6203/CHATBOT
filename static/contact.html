@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Nirmla Sweets</title>
+    <!-- Google Fonts for Professional Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d35400;      /* Deep Saffron / Sweet Orange */
+            --primary-dark: #b84a00;
+            --text-dark: #2c3e50;    /* Charcoal */
+            --text-muted: #596a7a;
+            --bg-body: #fbf9f6;      /* Off-white Cream */
+            --white: #ffffff;
+            --border-radius: 12px;
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ----- Navbar ----- */
+        .navbar {
+            background-color: var(--white);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-info h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .contact-details ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .contact-details li {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-details span.label {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .map-box iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 350px;
+            border-radius: var(--border-radius);
+            border: 0;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.05);
+            background-color: #1ebe5d;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="brand brand-font">Nirmla Sweets</a>
+        <div class="nav-links">
+            <a href="/">Home Menu</a>
+            <a href="/about">About Us</a>
+            <a href="/contact" class="active">Contact</a>
+        </div>
+    </nav>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <h1>Get in Touch</h1>
+            <p>We'd love to hear from you. Find us at the shop for fresh sweets daily, or order conveniently via phone and WhatsApp.</p>
+            
+            <div class="contact-details">
+                <ul>
+                    <li>
+                        <span class="label">Address</span>
+                        1329, Ara - Sasaram Rd, Bikramganj, Bihar 802212
+                    </li>
+                    <li>
+                        <span class="label">Phone</span>
+                        <a href="tel:+916203454484" style="color: var(--text-dark); text-decoration: none;">+91 62034 54484</a>
+                    </li>
+                    <li>
+                        <span class="label">Opening Hours</span>
+                        Daily: 8:00 AM - 9:30 PM
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="map-box">
+            <!-- Google Maps Embed for generic Bikramganj coordinates. -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14408.851912448464!2d84.23724316977539!3d25.1959728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398dabe1cddbfbfb%3A0xe54f67c5147779f!2sBikramganj%2C%20Bihar!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+    <!-- WhatsApp Order Button -->
+    <a href="https://wa.me/916203454484?text=Hi! I am reaching out from your Contact Page." class="whatsapp-float" target="_blank">
+        Chat with Us
+    </a>
+
+</body>
+</html>

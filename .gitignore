@@ -1,0 +1,29 @@
+# Environments
+.env
+.venv/
+venv/
+ENV/
+env/
+
+# Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Databases
+*.sqlite3
+*.db
+
+# Logs
+*.log
+chatbot.log
+flask_server.log
+
+# VS Code / IDEs
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db

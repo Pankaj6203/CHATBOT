@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Nirmla Sweets</title>
+    <!-- Google Fonts for Professional Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #d35400;      /* Deep Saffron / Sweet Orange */
+            --primary-dark: #b84a00;
+            --text-dark: #2c3e50;    /* Charcoal */
+            --text-muted: #596a7a;
+            --bg-body: #fbf9f6;      /* Off-white Cream */
+            --white: #ffffff;
+            --border-radius: 12px;
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ----- Navbar ----- */
+        .navbar {
+            background-color: var(--white);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .main-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .main-container h1 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        .main-container p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-align: justify;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #fff;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 15px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.05);
+            background-color: #1ebe5d;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="brand brand-font">Nirmla Sweets</a>
+        <div class="nav-links">
+            <a href="/">Home Menu</a>
+            <a href="/about" class="active">About Us</a>
+            <a href="/contact">Contact</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <h1>Our Story</h1>
+        <p>
+            Welcome to <strong>Nirmla Sweets</strong>, Bikramganj's beloved spot for authentic Indian delicacies. 
+            For decades, our family has preserved the rich, traditional recipes passed down through generations. 
+            We believe that every sweet tells a story of heritage, love, and celebration.
+        </p>
+        <p>
+            From our hot, crispy Jalebis to our signature Kaju Barfi and savory Chhole Bhature, we use only the finest, 
+            pure ingredients. Whether you are celebrating a festival, planning a wedding, or simply treating yourself 
+            to a quality snack, Nirmla Sweets promises an unforgettable taste experience.
+        </p>
+        <p>
+            We take pride in our hygiene, our service, and the joy we bring to our customers' faces. 
+            Come visit us, or order safely via WhatsApp. Tradition has never tasted so sweet!
+        </p>
+    </div>
+
+    <!-- WhatsApp Order Button -->
+    <a href="https://wa.me/916203454484?text=Hi! I would like to place an order from the menu." class="whatsapp-float" target="_blank">
+        Order via WhatsApp
+    </a>
+
+</body>
+</html>
