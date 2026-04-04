@@ -6,6 +6,7 @@ Features: Dynamic menu, cart management, order processing, session handling
 
 import json
 import logging
+import re
 from typing import Dict, List, Optional, Tuple, Union, Any
 from datetime import datetime
 from enum import Enum
