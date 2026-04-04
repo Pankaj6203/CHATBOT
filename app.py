@@ -182,21 +182,22 @@ def handle_whatsapp_message():
             return f'<?xml version="1.0" encoding="UTF-8"?><Response><Message>{response}</Message></Response>', 200, {'Content-Type': 'application/xml'}
 
         # 2. Check for Meta/Facebook API Format (JSON Data)
-        data = request.get_json(silent=True)
-        if data and data.get("object") == "whatsapp_business_account":
-            entry = data.get("entry", [{}])[0]
-            changes = entry.get("changes", [{}])
+        if request.is_json:
+            data = request.get_json(silent=True)
+            if data and data.get("object") == "whatsapp_business_account":
+                entry = data.get("entry", [{}])[0]
+                changes = entry.get("changes", [{}])
 
-            for change in changes:
-                value = change.get("value", {})
-                messages = value.get("messages", [])
+                for change in changes:
+                    value = change.get("value", {})
+                    messages = value.get("messages", [])
 
-                for msg in messages:
-                    phone_number = msg.get("from")
-                    message_type = msg.get("type")
+                    for msg in messages:
+                        phone_number = msg.get("from")
+                        message_type = msg.get("type")
 
-                    if message_type == "text":
-                        user_message = msg.get("text", {}).get("body", "").strip()
+                        if message_type == "text":
+                            user_message = msg.get("text", {}).get("body", "").strip()
                         if user_message:
                             logger.info(f"Meta Message from {phone_number}: {user_message}")
 
