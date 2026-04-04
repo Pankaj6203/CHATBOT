@@ -51,9 +51,11 @@ class Database:
                 CREATE TABLE IF NOT EXISTS menu_items (
                     item_id INTEGER PRIMARY KEY,
                     name TEXT NOT NULL UNIQUE,
-                    price REAL NOT NULL,
+                    price REAL,
                     category TEXT NOT NULL,
                     description TEXT,
+                    image_url TEXT,
+                    variants TEXT,
                     available BOOLEAN DEFAULT 1,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -116,22 +118,28 @@ class Database:
     
     def insert_menu_items(self, items: List[Dict]) -> int:
         """Insert multiple menu items (bulk operation)"""
+        import json
         with self.get_connection() as conn:
             cursor = conn.cursor()
             inserted = 0
             
+            # Clear old menu
+            cursor.execute("DELETE FROM menu_items")
+            
             for item in items:
                 try:
                     cursor.execute("""
-                        INSERT OR IGNORE INTO menu_items 
-                        (item_id, name, price, category, description, available)
-                        VALUES (?, ?, ?, ?, ?, ?)
+                        INSERT INTO menu_items 
+                        (item_id, name, price, category, description, image_url, variants, available)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                     """, (
-                        item.get("id"),
+                        item.get("item_id") or item.get("id"),
                         item.get("name"),
-                        item.get("price"),
+                        item.get("price", 0),
                         item.get("category"),
                         item.get("description", ""),
+                        item.get("image_url", ""),
+                        json.dumps(item.get("variants", [])),
                         item.get("available", True)
                     ))
                     if cursor.rowcount > 0:
@@ -144,13 +152,20 @@ class Database:
     
     def get_all_menu_items(self) -> List[Dict]:
         """Fetch all available menu items"""
+        import json
         with self.get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute("""
                 SELECT * FROM menu_items WHERE available = 1
                 ORDER BY category, name
             """)
-            return [dict(row) for row in cursor.fetchall()]
+            items = [dict(row) for row in cursor.fetchall()]
+            for item in items:
+                try:
+                    item['variants'] = json.loads(item.get('variants', '[]'))
+                except:
+                    item['variants'] = []
+            return items
     
     def get_menu_by_category(self, category: str) -> List[Dict]:
         """Get menu items by category"""
@@ -161,7 +176,13 @@ class Database:
                 WHERE category = ? AND available = 1
                 ORDER BY name
             """, (category,))
-            return [dict(row) for row in cursor.fetchall()]
+            items = [dict(row) for row in cursor.fetchall()]
+        for item in items:
+            try:
+                item['variants'] = __import__('json').loads(item.get('variants', '[]'))
+            except:
+                item['variants'] = []
+        return items
     
     def get_menu_item_by_id(self, item_id: int) -> Optional[Dict]:
         """Get single menu item by ID"""
@@ -246,7 +267,13 @@ class Database:
                 SELECT * FROM order_items WHERE order_id = ?
                 ORDER BY created_at
             """, (order_id,))
-            return [dict(row) for row in cursor.fetchall()]
+            items = [dict(row) for row in cursor.fetchall()]
+        for item in items:
+            try:
+                item['variants'] = __import__('json').loads(item.get('variants', '[]'))
+            except:
+                item['variants'] = []
+        return items
     
     def get_user_orders(self, phone_number: str, limit: int = 10) -> List[Dict]:
         """Get recent orders for a user"""
@@ -257,7 +284,13 @@ class Database:
                 ORDER BY created_at DESC
                 LIMIT ?
             """, (phone_number, limit))
-            return [dict(row) for row in cursor.fetchall()]
+            items = [dict(row) for row in cursor.fetchall()]
+        for item in items:
+            try:
+                item['variants'] = __import__('json').loads(item.get('variants', '[]'))
+            except:
+                item['variants'] = []
+        return items
     
     def update_order_status(self, order_id: str, status: str) -> bool:
         """Update order status"""
@@ -302,7 +335,13 @@ class Database:
             params.append(limit)
             
             cursor.execute(query, params)
-            return [dict(row) for row in cursor.fetchall()]
+            items = [dict(row) for row in cursor.fetchall()]
+        for item in items:
+            try:
+                item['variants'] = __import__('json').loads(item.get('variants', '[]'))
+            except:
+                item['variants'] = []
+        return items
     
     # ==================== ANALYTICS ====================
     
@@ -336,7 +375,13 @@ class Database:
                 ORDER BY total_ordered DESC
                 LIMIT ?
             """, (limit,))
-            return [dict(row) for row in cursor.fetchall()]
+            items = [dict(row) for row in cursor.fetchall()]
+        for item in items:
+            try:
+                item['variants'] = __import__('json').loads(item.get('variants', '[]'))
+            except:
+                item['variants'] = []
+        return items
     
     def get_order_count(self) -> int:
         """Get total number of orders"""

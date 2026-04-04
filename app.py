@@ -522,6 +522,20 @@ def index():
             "api": "Try POST /api/chat"
         }), 200
 
+@app.route('/about', methods=['GET'])
+def about():
+    try:
+        return send_from_directory(os.path.join(os.path.dirname(__file__), 'static'), 'about.html')
+    except:
+        return "About Page", 200
+
+@app.route('/contact', methods=['GET'])
+def contact():
+    try:
+        return send_from_directory(os.path.join(os.path.dirname(__file__), 'static'), 'contact.html')
+    except:
+        return "Contact Page", 200
+
 
 # ==================== CHAT API ====================
 
@@ -543,7 +557,7 @@ def chat_api():
         user_session = chatbot.get_or_create_session(phone)
         
         # Get chatbot response
-        response = chatbot.handle_message(message, phone)
+        response = chatbot.handle_user_message(phone, message)
         
         # Log the interaction
         if db:

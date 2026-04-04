@@ -22,8 +22,9 @@ logging.basicConfig(
 class UserState(Enum):
     """Enumeration for conversation states"""
     WELCOME = "welcome"
-    MENU = "menu"
+    SELECTING_CATEGORY = "selecting_category"
     SELECTING_ITEM = "selecting_item"
+    SELECTING_VARIANT = "selecting_variant"
     ENTERING_QUANTITY = "entering_quantity"
     ADD_MORE = "add_more"
     CHECKOUT = "checkout"
@@ -32,14 +33,15 @@ class UserState(Enum):
 
 class MenuItem:
     """Represents a menu item"""
-    def __init__(self, item_id: int, name: str, price: float, 
-                 category: str, description: str = "", available: bool = True):
+    def __init__(self, item_id: int, name: str, price: float, category: str, description: str = "", available: bool = True, image_url: str = "", variants: list = None):
         self.item_id = item_id
         self.name = name
         self.price = price
         self.category = category
         self.description = description
         self.available = available
+        self.image_url = image_url
+        self.variants = variants or []
 
     def to_dict(self):
         return {
@@ -48,7 +50,9 @@ class MenuItem:
             "price": self.price,
             "category": self.category,
             "description": self.description,
-            "available": self.available
+            "available": self.available,
+            "image_url": self.image_url,
+            "variants": self.variants
         }
 
     def __repr__(self):
@@ -58,19 +62,25 @@ class MenuItem:
 
 class CartItem:
     """Represents an item in user's cart"""
-    def __init__(self, menu_item: MenuItem, quantity: int):
+    def __init__(self, menu_item: MenuItem, quantity: int, variant: dict = None):
         self.menu_item = menu_item
         self.quantity = quantity
+        self.variant = variant
+        
+        # Calculate price and name based on variant
+        self.price = variant['price'] if variant else menu_item.price
+        variant_suffix = f" ({variant['name']})" if variant else ""
+        self.name = f"{menu_item.name}{variant_suffix}"
 
     @property
     def subtotal(self) -> float:
-        return self.menu_item.price * self.quantity
+        return self.price * self.quantity
 
     def to_dict(self):
         return {
             "item_id": self.menu_item.item_id,
-            "name": self.menu_item.name,
-            "price": self.menu_item.price,
+            "name": self.name,
+            "price": self.price,
             "quantity": self.quantity,
             "subtotal": self.subtotal
         }
@@ -79,17 +89,19 @@ class CartItem:
 class Cart:
     """Manages user's shopping cart"""
     def __init__(self):
-        self.items: Dict[int, CartItem] = {}
+        self.items: Dict[str, CartItem] = {}
 
-    def add_item(self, menu_item: MenuItem, quantity: int) -> bool:
+    def add_item(self, menu_item: MenuItem, quantity: int, variant: dict = None) -> bool:
         """Add item to cart or update quantity if exists"""
         if quantity <= 0:
             return False
         
-        if menu_item.item_id in self.items:
-            self.items[menu_item.item_id].quantity += quantity
+        key = f"{menu_item.item_id}_{variant['name']}" if variant else str(menu_item.item_id)
+        
+        if key in self.items:
+            self.items[key].quantity += quantity
         else:
-            self.items[menu_item.item_id] = CartItem(menu_item, quantity)
+            self.items[key] = CartItem(menu_item, quantity, variant)
         return True
 
     def remove_item(self, item_id: int) -> bool:
@@ -147,6 +159,8 @@ class UserSession:
         self.state = UserState.WELCOME
         self.cart = Cart()
         self.selected_item: Optional[MenuItem] = None
+        self.selected_category: Optional[str] = None
+        self.selected_variant: Optional[dict] = None
         self.created_at = datetime.now()
         self.last_interaction = datetime.now()
 
@@ -169,7 +183,7 @@ class MenuManager:
     def __init__(self, db=None):
         self.db = db
         self.items: List[MenuItem] = []
-        
+
         # Try to load from database first
         if db:
             try:
@@ -184,43 +198,67 @@ class MenuManager:
         """Load menu from database"""
         db_items = self.db.get_all_menu_items()
         for item_data in db_items:
+            # item_data['variants'] might be a JSON string or dict list, database.py now returns parsed JSON
+            variants = item_data.get("variants", [])
+            if isinstance(variants, str):
+                import json
+                try:
+                    variants = json.loads(variants)
+                except:
+                    variants = []
+            
             self.items.append(MenuItem(
                 item_id=item_data["item_id"],
                 name=item_data["name"],
                 price=item_data["price"],
                 category=item_data["category"],
-                description=item_data.get("description", "")
+                description=item_data.get("description", ""),
+                image_url=item_data.get("image_url", ""),
+                variants=variants
             ))
         logging.info(f"Loaded {len(self.items)} items from database")
 
     def _load_menu(self):
         """Load menu from dynamic structure (easily extendable to DB/API)"""
-        menu_data = [
-            {"id": 1, "name": "Gulab Jamun", "price": 50, "category": "Sweets", "description": "Soft & syrupy"},
-            {"id": 2, "name": "Jalebi", "price": 40, "category": "Sweets", "description": "Crispy & sweet"},
-            {"id": 3, "name": "Barfi", "price": 80, "category": "Sweets", "description": "Traditional barfi"},
-            {"id": 4, "name": "Rasgulla", "price": 60, "category": "Sweets", "description": "Cottage cheese balls"},
-            {"id": 5, "name": "Laddu", "price": 70, "category": "Sweets", "description": "Round sweet"},
-            {"id": 6, "name": "Kaju Barfi", "price": 120, "category": "Sweets", "description": "Cashew barfi"},
-            {"id": 7, "name": "Chhole Bhature", "price": 60, "category": "Namkeen", "description": "Chickpeas with fried bread"},
-            {"id": 8, "name": "Samosa", "price": 15, "category": "Namkeen", "description": "Crispy pastry"},
-            {"id": 9, "name": "Kachori", "price": 20, "category": "Namkeen", "description": "Spicy fried pastry"},
-            {"id": 10, "name": "Mathri", "price": 35, "category": "Namkeen", "description": "Salted crackers"},
-            {"id": 11, "name": "Pakora", "price": 30, "category": "Namkeen", "description": "Fried fritters"},
-            {"id": 12, "name": "Aloo Tikki", "price": 25, "category": "Namkeen", "description": "Potato patty"},
-            {"id": 13, "name": "Almonds (500g)", "price": 500, "category": "Dry Fruits", "description": "Premium almonds"},
-            {"id": 14, "name": "Cashews (500g)", "price": 450, "category": "Dry Fruits", "description": "Premium cashews"},
-            {"id": 15, "name": "Mixed Dry Fruits", "price": 600, "category": "Dry Fruits", "description": "Assorted nuts"},
-        ]
-        
+        import json
+        try:
+            with open("menu_data.json", "r", encoding="utf-8") as f:
+                menu_data = json.load(f)
+        except Exception as e:
+            logging.error(f"Could not load menu_data.json: {e}")
+            menu_data = []
+
         for item_data in menu_data:
             self.items.append(MenuItem(
-                item_id=item_data["id"],
+                item_id=item_data["item_id"],
                 name=item_data["name"],
                 price=item_data["price"],
                 category=item_data["category"],
-                description=item_data.get("description", "")
+                description=item_data.get("description", ""),
+                image_url=item_data.get("image_url", ""),
+                variants=item_data.get("variants", [])
             ))
+
+    def get_categories(self) -> List[str]:
+        """Get unique categories"""
+        return sorted(list(set(item.category for item in self.items if item.available)))
+
+    def get_by_category(self, category_idx_or_name: str) -> List[MenuItem]:
+        """Get menu items by category name or index"""
+        categories = self.get_categories()
+        
+        # Try as index
+        try:
+            idx = int(category_idx_or_name) - 1
+            if 0 <= idx < len(categories):
+                target_cat = categories[idx]
+                return [i for i in self.items if i.category == target_cat and i.available]
+        except ValueError:
+            pass
+            
+        # Try as name
+        target_cat = category_idx_or_name.lower()
+        return [i for i in self.items if i.category.lower() == target_cat and i.available]
 
     def get_by_id(self, item_id: int) -> Optional[MenuItem]:
         """Get menu item by ID"""
@@ -229,52 +267,37 @@ class MenuManager:
                 return item
         return None
 
-    def get_by_name(self, name: str) -> Optional[MenuItem]:
-        """Get menu item by name (case-insensitive)"""
-        name_lower = name.lower().strip()
-        for item in self.items:
-            if item.name.lower() == name_lower:
-                return item
-        return None
+    def get_formatted_categories(self) -> str:
+        cats = self.get_categories()
+        res = "Please select a category by replying with its number:\n\n"
+        for i, cat in enumerate(cats, 1):
+            res += f"{i}. {cat}\n"
+        return res
 
-    def get_available_items(self) -> List[MenuItem]:
-        """Get all available menu items"""
-        return [item for item in self.items if item.available]
-
-    def get_by_category(self, category: str) -> List[MenuItem]:
-        """Get menu items by category"""
-        return [item for item in self.items if item.category.lower() == category.lower()]
-
-    def get_formatted_menu(self, category: Optional[str] = None) -> str:
-        """Get formatted menu display"""
-        items = self.get_by_category(category) if category else self.get_available_items()
-        
+    def get_formatted_menu_for_category(self, category_name: str) -> str:
+        items = [i for i in self.items if i.category == category_name and i.available]
         if not items:
-            return "No items available in this category."
-        
-        menu_display = "Nirmla SWEETS MENU\n" + "="*60 + "\n"
-        
-        categories = {}
+            return "No items in this category."
+            
+        res = f"--- {category_name} ---\nReply with the item number:\n\n"
         for item in items:
-            if item.category not in categories:
-                categories[item.category] = []
-            categories[item.category].append(item)
+            res += f"{item.item_id}. {item.name}\n"
+            if item.description:
+                res += f"   {item.description}\n"
+        return res
         
-        for cat, cat_items in categories.items():
-            menu_display += f"\n{cat}:\n"
-            for item in cat_items:
-                menu_display += f"  {item.item_id}. {item.name} - Rs {item.price}\n"
-                if item.description:
-                    menu_display += f"     ({item.description})\n"
-        
-        menu_display += "\n" + "="*60 + "\n"
-        menu_display += "Reply with item number or name to select.\n"
-        return menu_display
-
+    def get_formatted_variants_for_item(self, item: MenuItem) -> str:
+        if not item.variants:
+            return f"Selected {item.name} at Rs {item.price}.\nPlease enter quantity:"
+            
+        res = f"Select size/variant for {item.name}:\n\n"
+        for i, var in enumerate(item.variants, 1):
+            res += f"{i}. {var['name']} - Rs {var['price']}\n"
+        return res
 
 class ChatbotEngine:
     """Main chatbot engine - orchestrates conversation flow"""
-    
+
     def __init__(self, db=None):
         self.db = db
         self.menu_manager = MenuManager(db=db)
@@ -282,250 +305,190 @@ class ChatbotEngine:
         logging.info("Chatbot initialized")
 
     def get_or_create_session(self, phone_number: str) -> UserSession:
-        """Get existing session or create new one"""
         if phone_number not in self.sessions:
             self.sessions[phone_number] = UserSession(phone_number)
-            logging.info(f"New session created for {phone_number}")
-            
-            # Create user in database if we have one
             if self.db:
                 try:
                     self.db.create_or_update_user(phone_number)
                 except Exception as e:
                     logging.warning(f"Failed to create user in DB: {e}")
-        
+
         session = self.sessions[phone_number]
         session.update_activity()
         return session
 
-    def parse_user_input(self, user_input: str) -> Tuple[str, Optional[int]]:
-        """Parse user input and extract intent and value"""
+    def parse_user_input(self, user_input: str) -> Tuple[str, Any]:
         user_input = user_input.lower().strip()
         
-        # Check if it's a number (menu item selection)
-        try:
-            item_id = int(user_input)
-            return "item_selection", item_id
-        except ValueError:
-            pass
-        
-        # Check for keywords
+        if re.match(r"^\d+$", user_input):
+            return "number", int(user_input)
+
         keywords = {
-            "hi": "greeting", "hello": "greeting", "hola": "greeting", "hey": "greeting",
-            "menu": "menu", "show menu": "menu",
-            "cart": "view_cart", "view cart": "view_cart",
-            "checkout": "checkout", "finish": "checkout", "order": "checkout",
+            "hi": "greeting", "hello": "greeting", "menu": "menu",
+            "cart": "view_cart", "checkout": "checkout", "finish": "checkout",
             "yes": "confirm", "ok": "confirm", "confirm": "confirm",
             "no": "add_more", "more": "add_more",
-            "quit": "exit", "bye": "exit", "goodbye": "exit",
+            "back": "back"
         }
-        
+
         for keyword, intent in keywords.items():
-            if keyword in user_input:
+            if keyword == user_input:
                 return intent, None
-        
-        # Try to match with menu item name
-        for item in self.menu_manager.items:
-            if item.name.lower() in user_input or user_input in item.name.lower():
-                return "item_selection_by_name", item.item_id
-        
-        return "unknown", None
+
+        return "text", user_input
 
     def handle_user_message(self, phone_number: str, user_message: str) -> str:
-        """Main entry point for processing user messages"""
         session = self.get_or_create_session(phone_number)
         intent, value = self.parse_user_input(user_message)
-        
-        logging.info(f"User {phone_number} - Intent: {intent}, State: {session.state.value}")
-        
-        # Handle quantity input if in quantity state
-        if session.state == UserState.ENTERING_QUANTITY:
-            try:
-                quantity = int(user_message.strip())
-                return self._handle_quantity_confirmation(session, quantity)
-            except ValueError:
-                pass
-        
-        if intent == "greeting" or session.state == UserState.WELCOME:
+
+        if intent in ["greeting", "menu"]:
+            session.state = UserState.SELECTING_CATEGORY
             return self._handle_greeting(session)
-        elif intent == "menu":
-            return self._handle_menu_request(session)
-        elif intent in ("item_selection", "item_selection_by_name"):
-            return self._handle_item_selection(session, value)
-        elif intent == "view_cart":
+            
+        if intent == "view_cart":
             return self._handle_cart_view(session)
-        elif intent == "add_more":
-            return self._handle_add_more(session)
-        elif intent == "checkout":
+            
+        if intent == "checkout":
             return self._handle_checkout(session)
-        elif intent == "confirm":
-            return self._handle_order_confirmation(session)
-        elif intent == "exit":
-            return self._handle_exit(session)
-        else:
-            return "Sorry, I didn't understand. Type 'menu' to see items or 'help' for options."
+            
+        if intent == "back":
+            session.state = UserState.SELECTING_CATEGORY
+            return self.menu_manager.get_formatted_categories()
+
+        # State machine
+        if session.state == UserState.WELCOME or session.state == UserState.SELECTING_CATEGORY:
+            if intent == "number" or intent == "text":
+                return self._handle_category_selection(session, str(value or user_message))
+                
+        elif session.state == UserState.SELECTING_ITEM:
+            if intent == "number":
+                return self._handle_item_selection(session, value)
+                
+        elif session.state == UserState.SELECTING_VARIANT:
+            if intent == "number":
+                return self._handle_variant_selection(session, value)
+                
+        elif session.state == UserState.ENTERING_QUANTITY:
+            if intent == "number":
+                return self._handle_quantity(session, value)
+                
+        elif session.state == UserState.ADD_MORE:
+            if intent == "confirm":
+                return self._handle_checkout(session)
+            elif intent == "add_more":
+                session.state = UserState.SELECTING_CATEGORY
+                return self.menu_manager.get_formatted_categories()
+                
+        elif session.state == UserState.CHECKOUT:
+            if intent == "confirm":
+                return self._handle_order_confirmation(session)
+            elif intent == "add_more":
+                session.state = UserState.SELECTING_CATEGORY
+                return self.menu_manager.get_formatted_categories()
+
+        return "I didn't quite get that. Type 'menu' to see options or 'cart' to view your bag."
 
     def _handle_greeting(self, session: UserSession) -> str:
-        """Handle greeting"""
-        session.state = UserState.MENU
-        return (
-            "Welcome to Nirmla Sweets!\n\n"
-            "Location: 1329, Ara - Sasaram Rd, Bikramganj\n"
-            "Phone: 6203454484\n\n"
-            + self.menu_manager.get_formatted_menu()
-        )
+        cats = self.menu_manager.get_formatted_categories()
+        return f"Welcome to Nirmla Sweets!\n\n{cats}"
 
-    def _handle_menu_request(self, session: UserSession) -> str:
-        """Handle menu display request"""
-        session.state = UserState.MENU
-        return self.menu_manager.get_formatted_menu()
+    def _handle_category_selection(self, session: UserSession, selection: str) -> str:
+        items = self.menu_manager.get_by_category(selection)
+        if not items:
+            return "Invalid category. Please select a valid number from the list."
+            
+        session.selected_category = items[0].category
+        session.state = UserState.SELECTING_ITEM
+        return self.menu_manager.get_formatted_menu_for_category(session.selected_category) + "\n\nReply 'back' to go to categories."
 
-    def _handle_item_selection(self, session: UserSession, item_id: Optional[int]) -> str:
-        """Handle item selection"""
-        if item_id is None:
-            return "Please provide a valid item number."
-        
+    def _handle_item_selection(self, session: UserSession, item_id: int) -> str:
         item = self.menu_manager.get_by_id(item_id)
-        if not item:
-            return f"Item {item_id} not found. Type 'menu' to see available items."
-        
-        if not item.available:
-            return f"{item.name} is out of stock. Select another item."
-        
+        if not item or item.category != session.selected_category:
+            return "Invalid item number for this category. Please try again."
+            
         session.selected_item = item
-        session.state = UserState.ENTERING_QUANTITY
-        return f"You selected: {item.name} (Rs {item.price})\n\nEnter quantity:"
+        
+        if item.variants:
+            session.state = UserState.SELECTING_VARIANT
+            return self.menu_manager.get_formatted_variants_for_item(item) + "\n\nReply 'back' to go to categories."
+        else:
+            session.state = UserState.ENTERING_QUANTITY
+            session.selected_variant = None
+            return f"You selected {item.name}.\nPlease enter quantity (e.g., 1, 2, 3...)"
 
-    def _handle_quantity_confirmation(self, session: UserSession, quantity: int) -> str:
-        """Handle quantity confirmation and add to cart"""
-        if session.selected_item is None:
-            return "No item selected. Type 'menu' to select an item."
-        
+    def _handle_variant_selection(self, session: UserSession, variant_idx: int) -> str:
+        item = session.selected_item
+        if not item or not item.variants:
+            session.state = UserState.SELECTING_CATEGORY
+            return self.menu_manager.get_formatted_categories()
+            
+        if 1 <= variant_idx <= len(item.variants):
+            session.selected_variant = item.variants[variant_idx - 1]
+            session.state = UserState.ENTERING_QUANTITY
+            return f"Selected: {item.name} ({session.selected_variant['name']})\nPlease enter quantity:"
+            
+        return "Invalid variant option. Please pick a number from the list above."
+
+    def _handle_quantity(self, session: UserSession, quantity: int) -> str:
         if quantity <= 0:
-            return "Invalid quantity. Please enter a number greater than 0."
+            return "Please enter a valid quantity (1 or more)."
+            
+        item = session.selected_item
+        variant = session.selected_variant
         
-        session.cart.add_item(session.selected_item, quantity)
-        subtotal = session.selected_item.price * quantity
-        
-        response = (
-            f"Added {quantity}x {session.selected_item.name} (Rs {subtotal})\n\n"
-            f"Options:\n"
-            f"1. 'menu' - Add more items\n"
-            f"2. 'cart' - View full cart\n"
-            f"3. 'checkout' - Confirm order"
-        )
-        
-        session.state = UserState.ADD_MORE
-        session.selected_item = None
-        return response
+        success = session.cart.add_item(item, quantity, variant)
+        if success:
+            session.state = UserState.ADD_MORE
+            session.selected_item = None
+            session.selected_variant = None
+            
+            subtotal = (variant['price'] if variant else item.price) * quantity
+            name = f"{item.name} ({variant['name']})" if variant else item.name
+            
+            return f"Added {quantity}x {name} (Rs {subtotal}) to cart.\n\nType 'yes' to checkout or 'no' to add more items."
+            
+        return "Failed to add to cart. Try again."
 
     def _handle_cart_view(self, session: UserSession) -> str:
-        """Handle cart view request"""
         if session.cart.is_empty():
-            return "Cart is empty. Type 'menu' to add items."
-        
-        return (
-            session.cart.get_summary() +
-            "\nOptions: 'menu' (add more) | 'checkout' (confirm)"
-        )
-
-    def _handle_add_more(self, session: UserSession) -> str:
-        """Handle adding more items"""
-        session.state = UserState.MENU
-        return "Select more items:\n\n" + self.menu_manager.get_formatted_menu()
+            return "Your cart is empty. Type 'menu' to start ordering."
+        return session.cart.get_summary() + "\n\nType 'checkout' to finish or 'menu' to add more."
 
     def _handle_checkout(self, session: UserSession) -> str:
-        """Handle checkout request"""
         if session.cart.is_empty():
-            return "Cart is empty. Type 'menu' to add items."
-        
+            return "Your cart is empty. Type 'menu' to add items."
+            
         session.state = UserState.CHECKOUT
-        return session.cart.get_summary() + "\nConfirm order? (yes/no)"
+        return session.cart.get_summary() + "\n\nPlease type 'confirm' to place your order or 'no' to add more items."
 
     def _handle_order_confirmation(self, session: UserSession) -> str:
-        """Handle order confirmation"""
         if session.cart.is_empty():
-            return "Cart is empty."
-        
-        order_id = f"ORD-{int(datetime.now().timestamp())}"
+            return "Your cart is empty."
+            
         total = session.cart.total
         
-        response = (
-            f"ORDER CONFIRMED!\n\n"
-            f"Order ID: {order_id}\n"
-            f"Total: Rs {total:.2f}\n\n"
-            + session.cart.get_summary() +
-            f"\nDelivery to: Bikramganj area\n"
-            f"Call 6203454484 for updates\n\n"
-            f"Thank you for ordering!"
-        )
-        
-        logging.info(f"Order: {order_id}, Total: Rs {total}")
-        
-        # Save order to database if available
+        # Save order to DB
         if self.db:
             try:
-                self.db.create_order(order_id, session.phone_number, total)
-                for cart_item in session.cart.items.values():
-                    self.db.add_order_item(
-                        order_id,
-                        cart_item.menu_item.item_id,
-                        cart_item.menu_item.name,
-                        cart_item.menu_item.price,
-                        cart_item.quantity,
-                        cart_item.subtotal
-                    )
-                self.db.log_action(session.phone_number, "order_placed", f"Order {order_id}: Rs {total}")
+                order_items = []
+                for item in session.cart.items.values():
+                    order_items.append({
+                        "item_id": item.menu_item.item_id,
+                        "name": item.name,
+                        "quantity": item.quantity,
+                        "price": item.price,
+                        "subtotal": item.subtotal
+                    })
+                order_id = self.db.create_order(session.phone_number, order_items, total)
+                
+                session.cart.clear()
+                session.state = UserState.ORDER_CONFIRMED
+                return f"Order placed successfully! Your order ID is #{order_id}.\nTotal amount: Rs {total}.\nWe will contact you shortly."
             except Exception as e:
-                logging.warning(f"Failed to save order to DB: {e}")
+                logging.error(f"Order creation failed: {e}")
+                return "Sorry, there was an error placing your order. Please try again."
         
+        # Fallback if no DB
         session.cart.clear()
-        session.state = UserState.WELCOME
-        
-        return response
-
-    def _handle_exit(self, session: UserSession) -> str:
-        """Handle user exit"""
-        session.state = UserState.WELCOME
-        return "Thank you! Visit us again.\n\nPhone: 6203454484"
-
-
-# ==================== MAIN INTERFACE ====================
-
-def main():
-    """Main function for testing chatbot"""
-    try:
-        from database import Database
-        db = Database()
-        chatbot = ChatbotEngine(db=db)
-        db_msg = f"\nDatabase: {db.db_path}"
-    except ImportError:
-        chatbot = ChatbotEngine()
-        db_msg = "\n(Running without database)"
-    
-    phone_number = "+916203454484"
-    
-    print("="*70)
-    print("Nirmla SWEETS RESTAURANT CHATBOT")
-    print("="*70)
-    print(f"\nPhone: {phone_number}{db_msg}")
-    print(f"Menu items: {len(chatbot.menu_manager.items)}")
-    print("Type 'quit' to exit\n")
-    
-    while True:
-        user_input = input("You: ").strip()
-        if not user_input:
-            continue
-        
-        if user_input.lower() == "quit":
-            print("Goodbye!")
-            break
-        
-        response = chatbot.handle_user_message(phone_number, user_input)
-        print(f"\nBot: {response}\n")
-        print("-"*70 + "\n")
-
-
-if __name__ == "__main__":
-    main()
-
+        session.state = UserState.ORDER_CONFIRMED
+        return f"Order confirmed!\nTotal amount: Rs {total}.\nThank you for choosing Nirmla Sweets!"

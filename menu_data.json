@@ -1,0 +1,77 @@
+[
+  {
+    "item_id": 1,
+    "name": "Chhole Bhature",
+    "price": 0,
+    "category": "Food",
+    "description": "Spicy chickpea curry with fluffy fried bread.",
+    "image_url": "https://images.unsplash.com/photo-1626132647523-66f5bf380027?q=80&w=600&auto=format&fit=crop",
+    "variants": [
+      {"name": "Half Plate (1 Pcs)", "price": 60},
+      {"name": "Full Plate (2 Pcs)", "price": 100}
+    ]
+  },
+  {
+    "item_id": 2,
+    "name": "Paneer Butter Masala",
+    "price": 0,
+    "category": "Food",
+    "description": "Rich and creamy cottage cheese curry.",
+    "image_url": "https://images.unsplash.com/photo-1631452180519-c014fe946bc0?q=80&w=600&auto=format&fit=crop",
+    "variants": [
+      {"name": "Half Plate", "price": 120},
+      {"name": "Full Plate", "price": 220}
+    ]
+  },
+  {
+    "item_id": 3,
+    "name": "Chowmein",
+    "price": 0,
+    "category": "Snacks",
+    "description": "Stir-fried noodles with mixed vegetables.",
+    "image_url": "https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=600&auto=format&fit=crop",
+    "variants": [
+      {"name": "Veg", "price": 50},
+      {"name": "Paneer", "price": 80},
+      {"name": "Egg", "price": 90}
+    ]
+  },
+  {
+    "item_id": 4,
+    "name": "Samosa",
+    "price": 0,
+    "category": "Snacks",
+    "description": "Crispy pastry filled with spiced potatoes and peas.",
+    "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70912?q=80&w=600&auto=format&fit=crop",
+    "variants": [
+      {"name": "Single (1 pc)", "price": 15},
+      {"name": "Plate (4 pcs)", "price": 50}
+    ]
+  },
+  {
+    "item_id": 5,
+    "name": "Gulab Jamun",
+    "price": 0,
+    "category": "Sweets",
+    "description": "Soft & syrupy delicious classic sweet.",
+    "image_url": "https://images.unsplash.com/photo-1605197143431-7b080f5899ea?q=80&w=600&auto=format&fit=crop",
+    "variants": [
+      {"name": "250g", "price": 100},
+      {"name": "500g", "price": 200},
+      {"name": "1 kg", "price": 400}
+    ]
+  },
+  {
+    "item_id": 6,
+    "name": "Kaju Katli",
+    "price": 0,
+    "category": "Sweets",
+    "description": "Premium cashew fudge topped with silver foil.",
+    "image_url": "https://images.unsplash.com/photo-1596813358055-667dc97fa44b?q=80&w=600&auto=format&fit=crop",
+    "variants": [
+      {"name": "250g", "price": 250},
+      {"name": "500g", "price": 500},
+      {"name": "1 kg", "price": 1000}
+    ]
+  }
+]
