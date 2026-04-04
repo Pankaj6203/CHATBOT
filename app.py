@@ -598,9 +598,9 @@ def server_error(error):
 
 # ==================== INITIALIZATION & STARTUP ====================
 
+init_services()
+
 if __name__ == "__main__":
-    init_services()
-    
     print("="*70)
     print("Nirmla SWEETS - FLASK CHATBOT SERVER")
     print("="*70)
