@@ -3,575 +3,1289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Umesh Sweets - Order Online</title>
+    <title>Umesh Sweets — Bikramganj's Finest Mithai</title>
+    <meta name="description" content="Umesh Sweets, Bikramganj — Fresh handcrafted Indian sweets. Order online or on WhatsApp for home delivery.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ── Reset & Tokens ──────────────────────────────────── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --brand:        #c0392b;
+            --brand-dark:   #96281b;
+            --brand-light:  #f9e5e3;
+            --gold:         #d4a017;
+            --gold-light:   #fdf3d7;
+            --text-primary: #1a1a2e;
+            --text-secondary:#5a5a7a;
+            --bg:           #fafafa;
+            --surface:      #ffffff;
+            --border:       #e8e8f0;
+            --success:      #27ae60;
+            --radius-sm:    8px;
+            --radius-md:    14px;
+            --radius-lg:    22px;
+            --shadow-sm:    0 2px 8px rgba(0,0,0,.07);
+            --shadow-md:    0 6px 24px rgba(0,0,0,.1);
+            --shadow-lg:    0 16px 48px rgba(0,0,0,.14);
+            --transition:   .25s cubic-bezier(.4,0,.2,1);
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* ── Utility ─────────────────────────────────────────── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        .sr-only   { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+        /* ── Navbar ──────────────────────────────────────────── */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
         }
 
-        /* Header */
-        .header {
-            text-align: center;
-            color: white;
-            padding: 40px 0 20px;
-            animation: slideDown 0.8s ease;
+        .navbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 68px;
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
         }
 
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
+        .nav-brand-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--brand);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
         }
 
-        .status-badge {
-            display: inline-block;
-            background: #4ade80;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            margin-top: 10px;
-            font-weight: bold;
-            animation: pulse 2s infinite;
+        .nav-brand-text {
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Main Content */
-        .content {
+        .nav-brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--brand);
+            line-height: 1.1;
+        }
+
+        .nav-brand-sub {
+            font-size: .72rem;
+            color: var(--text-secondary);
+            letter-spacing: .04em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: .9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--brand); }
+
+        .nav-live {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: blink 1.6s ease infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: .35; }
+        }
+
+        .nav-cta {
+            background: var(--brand);
+            color: #fff !important;
+            padding: 9px 20px;
+            border-radius: var(--radius-sm);
+            font-weight: 600 !important;
+            transition: background var(--transition) !important;
+        }
+
+        .nav-cta:hover { background: var(--brand-dark) !important; color: #fff !important; }
+
+        /* ── Hero ────────────────────────────────────────────── */
+        .hero {
+            background: linear-gradient(120deg, #fff5f4 0%, #fffbf0 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 72px 0 64px;
+        }
+
+        .hero-inner {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: 1fr 420px;
+            gap: 60px;
+            align-items: center;
         }
 
-        /* Chat Box */
-        .chat-section {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gold-light);
+            color: #8a6d00;
+            font-size: .8rem;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 20px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span { color: var(--brand); }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 480px;
+            margin-bottom: 36px;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 13px 26px;
+            border-radius: var(--radius-sm);
+            font-size: .95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+            transition: all var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--brand);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--brand-dark);
+            box-shadow: 0 4px 16px rgba(192,57,43,.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: #fff;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1ebe5d;
+            box-shadow: 0 4px 16px rgba(37,211,102,.35);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--brand);
+            border: 2px solid var(--brand);
+        }
+
+        .btn-outline:hover {
+            background: var(--brand-light);
+        }
+
+        /* Hero stats strip */
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .hero-stat { text-align: left; }
+
+        .hero-stat-num {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--brand);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: .8rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* Hero chat card */
+        .hero-chat-card {
+            background: var(--surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            animation: slideLeft 0.8s ease;
         }
 
-        .chat-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            font-size: 1.3em;
-            font-weight: bold;
+        .chat-card-header {
+            background: var(--brand);
+            color: #fff;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
+
+        .chat-card-avatar {
+            width: 38px;
+            height: 38px;
+            background: rgba(255,255,255,.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .chat-card-title { font-weight: 600; font-size: .95rem; }
+        .chat-card-subtitle { font-size: .78rem; opacity: .85; margin-top: 1px; }
 
         .chat-messages {
             flex: 1;
             overflow-y: auto;
             padding: 20px;
-            height: 400px;
-            background: #f5f5f5;
+            height: 300px;
+            background: #f7f7fa;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .message {
-            margin-bottom: 15px;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .message.bot {
-            text-align: left;
-        }
-
-        .message.user {
-            text-align: right;
-        }
+        .message { display: flex; flex-direction: column; }
+        .message.bot  { align-items: flex-start; }
+        .message.user { align-items: flex-end; }
 
         .message-text {
-            display: inline-block;
             padding: 10px 15px;
-            border-radius: 10px;
-            max-width: 70%;
-            word-wrap: break-word;
+            border-radius: 14px;
+            max-width: 82%;
+            font-size: .9rem;
+            line-height: 1.5;
+            word-break: break-word;
         }
 
-        .message.bot .message-text {
-            background: #e9ecef;
-            color: #333;
-            border-bottom-left-radius: 2px;
+        .message.bot  .message-text {
+            background: var(--surface);
+            color: var(--text-primary);
+            border-bottom-left-radius: 4px;
+            box-shadow: var(--shadow-sm);
         }
 
         .message.user .message-text {
-            background: #667eea;
-            color: white;
-            border-bottom-right-radius: 2px;
+            background: var(--brand);
+            color: #fff;
+            border-bottom-right-radius: 4px;
         }
 
         .chat-input-area {
-            padding: 15px;
-            border-top: 1px solid #ddd;
+            padding: 14px 16px;
+            border-top: 1px solid var(--border);
             display: flex;
             gap: 10px;
+            background: var(--surface);
         }
 
         .chat-input {
             flex: 1;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.95em;
-            resize: none;
-            max-height: 60px;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: .9rem;
+            font-family: inherit;
+            color: var(--text-primary);
+            background: var(--bg);
+            outline: none;
+            transition: border-color var(--transition);
         }
+
+        .chat-input:focus { border-color: var(--brand); }
 
         .send-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: var(--brand);
+            color: #fff;
             border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: .88rem;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s;
+            font-family: inherit;
+            transition: background var(--transition);
         }
 
-        .send-btn:hover {
-            transform: scale(1.05);
+        .send-btn:hover { background: var(--brand-dark); }
+
+        /* ── Section shared ──────────────────────────────────── */
+        .section { padding: 72px 0; }
+        .section-alt { background: #f4f4f8; }
+
+        .section-header { text-align: center; margin-bottom: 52px; }
+
+        .section-eyebrow {
+            display: inline-block;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--brand);
+            margin-bottom: 12px;
         }
 
-        .send-btn:active {
-            transform: scale(0.95);
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 14px;
         }
 
-        /* Info Section */
-        .info-section {
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ── Menu Grid ───────────────────────────────────────── */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 22px;
+        }
+
+        .menu-card {
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            padding: 22px 18px;
+            text-align: center;
+            transition: all var(--transition);
+            cursor: default;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--brand-light);
+        }
+
+        .menu-emoji { font-size: 2.4rem; margin-bottom: 12px; display: block; }
+
+        .menu-name {
+            font-weight: 600;
+            font-size: .95rem;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .menu-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--brand);
+        }
+
+        .menu-badge {
+            display: inline-block;
+            background: var(--brand-light);
+            color: var(--brand);
+            font-size: .7rem;
+            font-weight: 700;
+            padding: 2px 9px;
+            border-radius: 20px;
+            margin-top: 8px;
+            letter-spacing: .04em;
+        }
+
+        /* ── Features / Why Us ───────────────────────────────── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 28px;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            padding: 32px 28px;
+            border: 1px solid var(--border);
+            transition: box-shadow var(--transition);
+        }
+
+        .feature-card:hover { box-shadow: var(--shadow-md); }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-sm);
+            background: var(--brand-light);
             display: flex;
-            flex-direction: column;
-            gap: 20px;
-            animation: slideRight 0.8s ease;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 18px;
         }
 
-        .info-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        .feature-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 8px;
         }
 
-        .info-card h2 {
-            color: #667eea;
-            margin-bottom: 15px;
-            font-size: 1.3em;
+        .feature-desc {
+            font-size: .88rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
         }
 
-        .info-card p {
-            color: #666;
-            line-height: 1.6;
+        /* ── Contact Section ─────────────────────────────────── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .contact-info-list { list-style: none; margin-top: 8px; }
+
+        .contact-info-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .contact-info-list li:last-child { border-bottom: none; }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--brand-light);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .contact-label {
+            font-size: .78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .contact-value {
+            font-size: .95rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .contact-value a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact-value a:hover { color: var(--brand); }
+
+        /* Hours table */
+        .hours-card {
+            background: var(--surface);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .hours-header {
+            background: var(--brand);
+            color: #fff;
+            padding: 18px 24px;
+            font-weight: 700;
+            font-size: .95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hours-table { width: 100%; border-collapse: collapse; }
+
+        .hours-table td {
+            padding: 14px 24px;
+            font-size: .88rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hours-table tr:last-child td { border-bottom: none; }
+        .hours-table tr:nth-child(even) td { background: #fafafa; }
+
+        .hours-table .day    { color: var(--text-secondary); font-weight: 500; }
+        .hours-table .time   { color: var(--text-primary);   font-weight: 600; text-align: right; }
+        .hours-table .open   { color: var(--success); }
+
+        .cta-card {
+            margin-top: 24px;
+            background: linear-gradient(120deg, var(--brand) 0%, var(--brand-dark) 100%);
+            border-radius: var(--radius-md);
+            padding: 28px 24px;
+            color: #fff;
+        }
+
+        .cta-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .cta-card p {
+            font-size: .88rem;
+            opacity: .88;
+            margin-bottom: 18px;
+        }
+
+        /* ── Footer ──────────────────────────────────────────── */
+        .footer {
+            background: var(--text-primary);
+            color: rgba(255,255,255,.75);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            padding: 56px 0 40px;
+        }
+
+        .footer-brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #fff;
             margin-bottom: 10px;
         }
 
-        .contact-item {
+        .footer-brand-desc {
+            font-size: .88rem;
+            line-height: 1.7;
+            max-width: 280px;
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(255,255,255,.1);
             display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            text-decoration: none;
+            transition: background var(--transition);
+        }
+
+        .footer-social a:hover { background: rgba(255,255,255,.2); }
+
+        .footer-col-title {
+            font-size: .82rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.5);
+            margin-bottom: 18px;
+        }
+
+        .footer-links { list-style: none; }
+
+        .footer-links li { margin-bottom: 10px; }
+
+        .footer-links a {
+            font-size: .88rem;
+            color: rgba(255,255,255,.7);
+            text-decoration: none;
+            transition: color var(--transition);
+        }
+
+        .footer-links a:hover { color: #fff; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,.1);
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: .8rem;
+            flex-wrap: wrap;
             gap: 12px;
-            margin: 10px 0;
-            font-size: 0.95em;
         }
 
-        .contact-item strong {
-            color: #333;
+        .footer-badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
+        .footer-badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: .78rem;
         }
 
-        .menu-item {
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 0.9em;
-            color: #555;
-            border-left: 3px solid #667eea;
-        }
-
-        /* Statistics */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .stat-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .stat-box .number {
-            font-size: 2em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .stat-box .label {
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            color: white;
-            margin-top: 40px;
-            padding: 20px;
-            opacity: 0.8;
-        }
-
-        /* Animations */
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.7;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .content {
-                grid-template-columns: 1fr;
-            }
-
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .chat-messages {
-                height: 300px;
-            }
-        }
-
-        .loading {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background: #667eea;
+        /* ── Floating chat bubble ────────────────────────────── */
+        .chat-fab {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            width: 60px;
+            height: 60px;
+            background: var(--brand);
+            color: #fff;
             border-radius: 50%;
-            margin: 0 3px;
-            animation: loading 1.4s infinite;
-        }
-
-        @keyframes loading {
-            0%, 80%, 100% {
-                opacity: 0.2;
-            }
-            40% {
-                opacity: 1;
-            }
-        }
-
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 6px 24px rgba(192,57,43,.45);
             cursor: pointer;
-            font-weight: bold;
-            margin-top: 15px;
-            width: 100%;
-            font-size: 0.95em;
-            transition: background 0.3s;
+            z-index: 200;
+            border: none;
+            transition: transform var(--transition), background var(--transition);
         }
 
-        .whatsapp-btn:hover {
-            background: #20BA5F;
+        .chat-fab:hover { transform: scale(1.1); background: var(--brand-dark); }
+
+        .chat-fab-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 20px;
+            height: 20px;
+            background: var(--success);
+            border-radius: 50%;
+            font-size: .65rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--surface);
+        }
+
+        /* ── Loading dots ────────────────────────────────────── */
+        .loading-dots { display: flex; gap: 4px; padding: 4px 0; }
+
+        .loading-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--brand);
+            border-radius: 50%;
+            animation: dot-blink 1.4s infinite;
+        }
+
+        .loading-dot:nth-child(2) { animation-delay: .2s; }
+        .loading-dot:nth-child(3) { animation-delay: .4s; }
+
+        @keyframes dot-blink {
+            0%, 80%, 100% { opacity: .2; transform: scale(.8); }
+            40%            { opacity: 1;  transform: scale(1); }
+        }
+
+        /* ── Responsive ──────────────────────────────────────── */
+        @media (max-width: 900px) {
+            .hero-inner        { grid-template-columns: 1fr; }
+            .hero-chat-card    { max-width: 480px; }
+            .contact-grid      { grid-template-columns: 1fr; }
+            .footer-top        { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links         { display: none; }
+            .hero              { padding: 48px 0 40px; }
+            .hero-stat-num     { font-size: 1.4rem; }
+            .menu-grid         { grid-template-columns: repeat(2, 1fr); }
+            .features-grid     { grid-template-columns: 1fr; }
+            .footer-top        { grid-template-columns: 1fr; }
+            .footer-bottom     { flex-direction: column; align-items: flex-start; }
+        }
+
+        /* ── Scroll reveal ───────────────────────────────────── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>🍬 Umesh Sweets</h1>
-            <p>Bikramganj - Order Online & Get Delivery</p>
-            <div class="status-badge">● LIVE & ONLINE</div>
-        </div>
 
-        <!-- Main Content -->
-        <div class="content">
-            <!-- Chat Section -->
-            <div class="chat-section">
-                <div class="chat-header">💬 Chat with Bot</div>
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message bot">
-                        <div class="message-text">Namaste! 👋 Welcome to Umesh Sweets! How can I help you today?</div>
+    <!-- ═══════════════ NAVBAR ═══════════════ -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-inner">
+                <a href="#" class="nav-brand">
+                    <div class="nav-brand-icon">🍬</div>
+                    <div class="nav-brand-text">
+                        <span class="nav-brand-name">Umesh Sweets</span>
+                        <span class="nav-brand-sub">Bikramganj, Bihar</span>
+                    </div>
+                </a>
+
+                <ul class="nav-links">
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#why-us">Why Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <span class="nav-live">
+                            <span class="live-dot"></span>
+                            Live &amp; Open
+                        </span>
+                    </li>
+                    <li><a href="#" class="nav-cta" onclick="openWhatsApp(); return false;">Order Now</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-inner">
+                <!-- Left copy -->
+                <div class="hero-copy">
+                    <div class="hero-eyebrow">⭐ Rated 4.8 · Bikramganj's #1 Sweet Shop</div>
+                    <h1>Authentic Indian <span>Mithai</span>,<br>Delivered Fresh</h1>
+                    <p class="hero-desc">
+                        From classic Gulab Jamun to rich Barfi — every piece is handcrafted daily with 
+                        pure ingredients. Order online or chat with our AI assistant 24/7 for instant help.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
+                            🍬 Browse Menu
+                        </button>
+                        <button class="btn btn-whatsapp" onclick="openWhatsApp()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                                <path d="M12 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5.005L2.006 22l5.13-1.345A9.959 9.959 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.68 0-3.25-.442-4.607-1.213l-.33-.195-3.046.798.812-2.974-.213-.348A7.96 7.96 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
+                            </svg>
+                            WhatsApp Order
+                        </button>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-num">500+</div>
+                            <div class="hero-stat-label">Happy Customers</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-num">25+</div>
+                            <div class="hero-stat-label">Sweet Varieties</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-num">4.8★</div>
+                            <div class="hero-stat-label">Customer Rating</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-num">24/7</div>
+                            <div class="hero-stat-label">AI Support</div>
+                        </div>
                     </div>
                 </div>
-                <div class="chat-input-area">
-                    <input 
-                        type="text" 
-                        id="chatInput" 
-                        class="chat-input" 
-                        placeholder="Type your message... (e.g., menu, hi)" 
-                        onkeypress="handleKeyPress(event)"
-                    >
-                    <button class="send-btn" onclick="sendMessage()">Send</button>
+
+                <!-- Right chat card -->
+                <div class="hero-chat-card" id="chatSection">
+                    <div class="chat-card-header">
+                        <div class="chat-card-avatar">🤖</div>
+                        <div>
+                            <div class="chat-card-title">Umesh Sweets Assistant</div>
+                            <div class="chat-card-subtitle">Online · Replies instantly</div>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot">
+                            <div class="message-text">Namaste! 👋 Welcome to Umesh Sweets. I can help you browse our menu, place an order, or answer questions. How can I assist you?</div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input
+                            type="text"
+                            id="chatInput"
+                            class="chat-input"
+                            placeholder="Try: menu, order, prices…"
+                            onkeypress="handleKeyPress(event)"
+                        >
+                        <button class="send-btn" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ MENU ═══════════════ -->
+    <section class="section" id="menu">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">Our Specialities</span>
+                <h2 class="section-title">Popular Menu Items</h2>
+                <p class="section-subtitle">Freshly prepared every morning using traditional recipes passed down through generations.</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card reveal">
+                    <span class="menu-emoji">🍬</span>
+                    <div class="menu-name">Gulab Jamun</div>
+                    <div class="menu-price">₹50 / plate</div>
+                    <span class="menu-badge">Best Seller</span>
+                </div>
+                <div class="menu-card reveal">
+                    <span class="menu-emoji">🍡</span>
+                    <div class="menu-name">Rasgulla</div>
+                    <div class="menu-price">₹40 / plate</div>
+                    <span class="menu-badge">Popular</span>
+                </div>
+                <div class="menu-card reveal">
+                    <span class="menu-emoji">🥨</span>
+                    <div class="menu-name">Jalebi</div>
+                    <div class="menu-price">₹60 / plate</div>
+                    <span class="menu-badge">Morning Fresh</span>
+                </div>
+                <div class="menu-card reveal">
+                    <span class="menu-emoji">🍫</span>
+                    <div class="menu-name">Barfi</div>
+                    <div class="menu-price">₹45 / piece</div>
+                    <span class="menu-badge">Gift Pack Available</span>
+                </div>
+                <div class="menu-card reveal">
+                    <span class="menu-emoji">🍠</span>
+                    <div class="menu-name">Motichoor Ladoo</div>
+                    <div class="menu-price">₹55 / plate</div>
+                    <span class="menu-badge">Festival Special</span>
+                </div>
+                <div class="menu-card reveal">
+                    <span class="menu-emoji">🍚</span>
+                    <div class="menu-name">Kheer</div>
+                    <div class="menu-price">₹30 / bowl</div>
+                    <span class="menu-badge">Daily Fresh</span>
+                </div>
+                <div class="menu-card reveal">
+                    <span class="menu-emoji">🌰</span>
+                    <div class="menu-name">Halwa</div>
+                    <div class="menu-price">₹35 / plate</div>
+                    <span class="menu-badge">Seasonal</span>
+                </div>
+                <div class="menu-card reveal">
+                    <span class="menu-emoji">🥮</span>
+                    <div class="menu-name">Peda</div>
+                    <div class="menu-price">₹50 / plate</div>
+                    <span class="menu-badge">Pure Milk</span>
                 </div>
             </div>
 
-            <!-- Info Section -->
-            <div class="info-section">
-                <!-- Contact Card -->
-                <div class="info-card">
-                    <h2>📍 Contact Us</h2>
-                    <div class="contact-item">
-                        <strong>📞 Phone:</strong>
-                        <span>+91 620-345-4484</span>
+            <div style="text-align:center; margin-top:40px;" class="reveal">
+                <button class="btn btn-primary" onclick="openWhatsApp()">View Full Menu &amp; Order →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ WHY US ═══════════════ -->
+    <section class="section section-alt" id="why-us">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">Why Choose Us</span>
+                <h2 class="section-title">More Than Just Sweets</h2>
+                <p class="section-subtitle">We combine tradition with technology to give you the best experience.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🌿</div>
+                    <div class="feature-title">100% Pure Ingredients</div>
+                    <p class="feature-desc">We use only fresh milk, pure ghee, and natural sugars — no preservatives, no artificial colours.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🚚</div>
+                    <div class="feature-title">Fast Home Delivery</div>
+                    <p class="feature-desc">Delivery within Bikramganj in under 45 minutes. Special packaging keeps sweets fresh on arrival.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🤖</div>
+                    <div class="feature-title">AI-Powered 24/7 Support</div>
+                    <p class="feature-desc">Our chatbot on web and WhatsApp handles orders, tracks status, and answers questions round the clock.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🎁</div>
+                    <div class="feature-title">Custom Gift Boxes</div>
+                    <p class="feature-desc">Personalised mithai hampers for weddings, festivals, and corporate gifting. Bulk discounts available.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Secure &amp; Easy Payments</div>
+                    <p class="feature-desc">Pay via UPI, cash on delivery, or bank transfer. All transactions are safe and confirmed via WhatsApp.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon">⭐</div>
+                    <div class="feature-title">4.8-Star Rated</div>
+                    <p class="feature-desc">Over 500 happy customers have rated us 4.8/5. Read their reviews and place your order with confidence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ CONTACT ═══════════════ -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-eyebrow">Get In Touch</span>
+                <h2 class="section-title">Find Us &amp; Contact</h2>
+                <p class="section-subtitle">We are open every day. Reach us by phone, WhatsApp, or walk in to our store.</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Info -->
+                <div class="reveal">
+                    <ul class="contact-info-list">
+                        <li>
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <div class="contact-label">Phone</div>
+                                <div class="contact-value">
+                                    <a href="tel:+916203454484">+91 62034 54484</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">💬</div>
+                            <div>
+                                <div class="contact-label">WhatsApp (Order Bot)</div>
+                                <div class="contact-value">
+                                    <a href="https://wa.me/14155238886" target="_blank" rel="noopener">+1-415-523-8886</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <div class="contact-label">Location</div>
+                                <div class="contact-value">Main Market, Bikramganj<br>Rohtas District, Bihar — 802213</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <div class="contact-label">Email</div>
+                                <div class="contact-value">
+                                    <a href="mailto:umeshsweets@gmail.com">umeshsweets@gmail.com</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="cta-card">
+                        <h3>Ready to Order?</h3>
+                        <p>Chat with our AI assistant or tap below to WhatsApp us directly.</p>
+                        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                            <button class="btn btn-whatsapp" onclick="openWhatsApp()" style="flex:1; justify-content:center;">
+                                💚 Order on WhatsApp
+                            </button>
+                            <button class="btn btn-outline" onclick="document.getElementById('chatSection').scrollIntoView({behavior:'smooth'})" style="flex:1; justify-content:center; background:#fff3; color:#fff; border-color:rgba(255,255,255,.5);">
+                                💬 Open Chat
+                            </button>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <strong>📧 WhatsApp:</strong>
-                        <span>+1-415-523-8886 (Bot)</span>
-                    </div>
-                    <div class="contact-item">
-                        <strong>📍 Location:</strong>
-                        <span>Bikramganj, Bihar</span>
-                    </div>
-                    <button class="whatsapp-btn" onclick="openWhatsApp()">
-                        💚 Order on WhatsApp
-                    </button>
                 </div>
 
-                <!-- Popular Menu -->
-                <div class="info-card">
-                    <h2>🍤 Popular Items</h2>
-                    <div class="menu-grid">
-                        <div class="menu-item">🍬 Gulab Jamun - ₹50</div>
-                        <div class="menu-item">🍪 Rasgulla - ₹40</div>
-                        <div class="menu-item">🥧 Jalebi - ₹60</div>
-                        <div class="menu-item">🍰 Barfi - ₹45</div>
-                        <div class="menu-item">🍫 Motichoor - ₹55</div>
-                        <div class="menu-item">🍶 Kheer - ₹30</div>
+                <!-- Hours -->
+                <div class="reveal">
+                    <div class="hours-card">
+                        <div class="hours-header">🕐 Business Hours</div>
+                        <table class="hours-table" aria-label="Business hours">
+                            <tbody>
+                                <tr>
+                                    <td class="day">Monday – Friday</td>
+                                    <td class="time open">7:00 AM – 9:00 PM</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Saturday</td>
+                                    <td class="time open">6:00 AM – 10:00 PM</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Sunday</td>
+                                    <td class="time open">7:00 AM – 8:00 PM</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">Public Holidays</td>
+                                    <td class="time open">8:00 AM – 7:00 PM</td>
+                                </tr>
+                                <tr>
+                                    <td class="day">WhatsApp Bot</td>
+                                    <td class="time open">24 / 7 Always On</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
 
-                <!-- Statistics -->
-                <div class="stats">
-                    <div class="stat-box">
-                        <div class="number">100+</div>
-                        <div class="label">Orders Today</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="number">4.8★</div>
-                        <div class="label">Rating</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="number">24/7</div>
-                        <div class="label">Support</div>
+                    <div style="margin-top:22px; padding:22px; background:var(--gold-light); border:1px solid #e5c96a; border-radius:var(--radius-md);" class="reveal">
+                        <p style="font-size:.9rem; color:#7a5800; line-height:1.7;">
+                            <strong>Festival &amp; Bulk Orders:</strong><br>
+                            Planning a wedding, pooja, or corporate event? We offer bulk discounts and custom packaging. 
+                            Call or WhatsApp us at least <strong>2 days in advance</strong> to reserve your order.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>✨ Fresh sweets delivered to your doorstep | Powered by AI Chatbot</p>
-            <p style="font-size: 0.85em; margin-top: 10px;">🔒 Secure Payments | 🚚 Fast Delivery | 😊 100% Satisfaction</p>
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-brand-name">🍬 Umesh Sweets</div>
+                    <p class="footer-brand-desc">
+                        Bikramganj's favourite sweet shop since the beginning. Handcrafted with love, 
+                        delivered with care. Now powered by AI for a seamless ordering experience.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://wa.me/14155238886" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+                        <a href="tel:+916203454484" title="Call us">📞</a>
+                        <a href="mailto:umeshsweets@gmail.com" title="Email">✉️</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="footer-col-title">Quick Links</div>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#menu">Menu &amp; Prices</a></li>
+                        <li><a href="#why-us">Why Choose Us</a></li>
+                        <li><a href="#contact">Contact &amp; Hours</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Our Services</div>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="openWhatsApp(); return false;">Online Ordering</a></li>
+                        <li><a href="#" onclick="openWhatsApp(); return false;">Home Delivery</a></li>
+                        <li><a href="#" onclick="openWhatsApp(); return false;">Gift Hampers</a></li>
+                        <li><a href="#" onclick="openWhatsApp(); return false;">Bulk / Event Orders</a></li>
+                        <li><a href="#chatSection" onclick="document.getElementById('chatSection').scrollIntoView({behavior:'smooth'}); return false;">AI Chat Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2025 Umesh Sweets, Bikramganj. All rights reserved.</span>
+                <div class="footer-badges">
+                    <span class="footer-badge">🔒 Secure Payments</span>
+                    <span class="footer-badge">🚚 Fast Delivery</span>
+                    <span class="footer-badge">😊 100% Satisfaction</span>
+                    <span class="footer-badge">🤖 AI Powered</span>
+                </div>
+            </div>
         </div>
-    </div>
+    </footer>
+
+    <!-- Floating chat FAB -->
+    <button class="chat-fab" onclick="document.getElementById('chatSection').scrollIntoView({behavior:'smooth'})" aria-label="Open chat">
+        💬
+        <span class="chat-fab-badge">1</span>
+    </button>
 
     <script>
-        // Phone number for WhatsApp (Twilio sandbox)
         const WHATSAPP_NUMBER = '14155238886';
         const API_BASE = window.location.origin;
 
-        // Load chat history from localStorage
+        /* ── Chat logic ─────────────────────────────────────── */
         function loadChatHistory() {
-            const history = localStorage.getItem('chatHistory');
+            // Key includes year to avoid stale markup from prior design versions
+            const history = localStorage.getItem('chatHistory_2025');
             if (history) {
                 document.getElementById('chatMessages').innerHTML = history;
                 scrollToBottom();
             }
         }
 
-        // Save chat history to localStorage
         function saveChatHistory() {
-            const history = document.getElementById('chatMessages').innerHTML;
-            localStorage.setItem('chatHistory', history);
+            localStorage.setItem('chatHistory_2025', document.getElementById('chatMessages').innerHTML);
         }
 
-        // Send message
         async function sendMessage() {
             const input = document.getElementById('chatInput');
             const message = input.value.trim();
-
             if (!message) return;
 
-            // Add user message to chat
             addMessage(message, 'user');
             input.value = '';
 
-            // Show loading indicator
-            const loadingId = addMessage('<span class="loading"></span><span class="loading"></span><span class="loading"></span>', 'bot');
+            const loadingId = addLoadingDots();
 
             try {
-                // Get user phone
-                const phone = prompt('Enter your phone number (for order tracking):', '6203454484');
-                if (!phone) return;
+                const phone = prompt('Enter your phone number for order tracking:', '6203454484');
+                if (!phone) { removeById(loadingId); return; }
 
-                // Send to chatbot API
-                const response = await fetch(`${API_BASE}/api/chat`, {
+                const res = await fetch(`${API_BASE}/api/chat`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        phone: phone
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message, phone })
                 });
 
-                if (!response.ok) throw new Error('API error');
-                const data = await response.json();
+                removeById(loadingId);
 
-                // Remove loading indicator
-                const chatDiv = document.getElementById('chatMessages');
-                const loadingElem = chatDiv.querySelector('[data-id="' + loadingId + '"]');
-                if (loadingElem) loadingElem.remove();
-
-                // Add bot response
+                if (!res.ok) throw new Error('API error');
+                const data = await res.json();
                 addMessage(data.response || 'Sorry, I could not process your request.', 'bot');
-            } catch (error) {
-                console.error('Error:', error);
-                const chatDiv = document.getElementById('chatMessages');
-                const loadingElem = chatDiv.querySelector('[data-id="' + loadingId + '"]');
-                if (loadingElem) loadingElem.remove();
+            } catch (err) {
+                console.error(err);
+                removeById(loadingId);
                 addMessage('Sorry, I am currently offline. Please order via WhatsApp! 📱', 'bot');
             }
 
             saveChatHistory();
         }
 
-        // Add message to chat
         function addMessage(text, sender) {
-            const messagesDiv = document.getElementById('chatMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${sender}`;
-            messageDiv.innerHTML = `<div class="message-text">${text}</div>`;
+            const wrap = document.getElementById('chatMessages');
+            const div  = document.createElement('div');
+            div.className = `message ${sender}`;
+            div.innerHTML = `<div class="message-text">${text}</div>`;
             const id = Date.now();
-            messageDiv.setAttribute('data-id', id);
-            messagesDiv.appendChild(messageDiv);
+            div.dataset.id = id;
+            wrap.appendChild(div);
             scrollToBottom();
             return id;
         }
 
-        // Scroll to bottom
+        function addLoadingDots() {
+            const wrap = document.getElementById('chatMessages');
+            const div  = document.createElement('div');
+            div.className = 'message bot';
+            div.innerHTML = '<div class="message-text"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div></div>';
+            const id = Date.now();
+            div.dataset.id = id;
+            wrap.appendChild(div);
+            scrollToBottom();
+            return id;
+        }
+
+        function removeById(id) {
+            const el = document.querySelector(`[data-id="${id}"]`);
+            if (el) el.remove();
+        }
+
         function scrollToBottom() {
-            const messagesDiv = document.getElementById('chatMessages');
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            const wrap = document.getElementById('chatMessages');
+            wrap.scrollTop = wrap.scrollHeight;
         }
 
-        // Handle Enter key
-        function handleKeyPress(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault();
-                sendMessage();
-            }
+        function handleKeyPress(e) {
+            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
         }
 
-        // Open WhatsApp
         function openWhatsApp() {
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=Hi, I want to order sweets from Umesh Sweets`, '_blank');
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=Hi%2C+I+want+to+order+sweets+from+Umesh+Sweets`, '_blank');
         }
 
-        // Load chat history on page load
+        /* ── Scroll reveal ──────────────────────────────────── */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        /* ── Init ────────────────────────────────────────────── */
         window.addEventListener('load', () => {
             loadChatHistory();
-            addMessage('Try saying "menu" or "hello" to get started! 😊', 'bot');
+            addMessage('Try typing "menu" or "hello" to get started! 😊', 'bot');
             saveChatHistory();
+
+            // health check
+            fetch(`${API_BASE}/health`).then(r => r.json()).then(d => {
+                console.log('Server status:', d.status);
+            }).catch(() => {
+                console.log('Server offline — chat fallback active');
+            });
         });
-
-        // Check server health
-        async function checkHealth() {
-            try {
-                const response = await fetch(`${API_BASE}/health`);
-                const data = await response.json();
-                console.log('Server status:', data.status);
-            } catch (error) {
-                console.log('Server might be offline');
-            }
-        }
-
-        checkHealth();
     </script>
 </body>
 </html>
