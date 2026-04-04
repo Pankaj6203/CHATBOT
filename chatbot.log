@@ -286,3 +286,17 @@ Location: 1329, Ara - Sa...
 2026-04-04 20:06:58,948 - INFO - 127.0.0.1 - - [04/Apr/2026 20:06:58] "GET /health HTTP/1.1" 200 -
 2026-04-04 20:07:50,019 - ERROR - Error handling WhatsApp message: 415 Unsupported Media Type: Did not attempt to load JSON data because the request Content-Type was not 'application/json'.
 2026-04-04 20:07:50,019 - INFO - 127.0.0.1 - - [04/Apr/2026 20:07:50] "[35m[1mPOST /webhook HTTP/1.1[0m" 500 -
+2026-04-04 21:08:14,144 - INFO - \u2713 MongoDB connection successful
+2026-04-04 21:08:42,688 - ERROR - \u2717 MongoDB connection failed: ac-cwsk1e4-shard-00-01.uy7xu4q.mongodb.net:27017: [WinError 10054] An existing connection was forcibly closed by the remote host (configured timeouts: connectTimeoutMS: 20000.0ms)
+2026-04-04 21:08:42,688 - WARNING - \u26a0 MongoDB connection failed (ac-cwsk1e4-shard-00-01.uy7xu4q.mongodb.net:27017: [WinError 10054] An existing connection was forcib), falling back to SQLite
+2026-04-04 21:08:42,689 - INFO - Database initialized successfully
+2026-04-04 21:08:42,689 - INFO - \u2713 Connected to SQLite (fallback)
+2026-04-04 21:08:42,689 - INFO - Loaded 0 items from database
+2026-04-04 21:08:42,690 - INFO - Chatbot initialized
+2026-04-04 21:08:42,690 - INFO - \u2713 ChatbotEngine initialized
+2026-04-04 21:08:42,704 - INFO - Inserted 6 menu items
+2026-04-04 21:08:42,708 - INFO - \u2713 Loaded menu from JSON: 6 items
+2026-04-04 21:08:42,709 - INFO - \u2713 Twilio WhatsApp service initialized
+2026-04-04 21:08:42,709 - INFO -   Twilio Number: +14155238886
+2026-04-04 21:08:42,709 - INFO - \u2713 Twilio WhatsApp initialized
+2026-04-04 21:08:42,709 - INFO - Services initialized successfully

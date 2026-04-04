@@ -39,7 +39,7 @@ class MongoDatabase:
             elif not connection_string:
                 raise ValueError("Either connection_string or (username, password, host) must be provided")
             
-            self.client = MongoClient(connection_string, serverSelectionTimeoutMS=5000)
+            self.client = MongoClient(connection_string, serverSelectionTimeoutMS=20000)
             # Verify connection
             self.client.admin.command('ping')
             self.db = self.client[database_name]
@@ -91,11 +91,26 @@ class MongoDatabase:
             raise
     
     def get_all_menu_items(self) -> List[Dict]:
-        """Get all menu items"""
+        """Get all menu items joined with their categories"""
         try:
-            items = list(self.db.menu_items.find({}))
-            for item in items:
-                item.pop("_id", None)  # Remove MongoDB ID
+            pipeline = [
+                {
+                    "$lookup": {
+                        "from": "categories",
+                        "localField": "category_id",
+                        "foreignField": "_id",
+                        "as": "category_info"
+                    }
+                },
+                {"$unwind": "$category_info"},
+                {
+                    "$addFields": {
+                        "category": "$category_info.name"
+                    }
+                },
+                {"$project": {"category_info": 0, "_id": 0}}
+            ]
+            items = list(self.db.menu_items.aggregate(pipeline))
             return items
         except Exception as e:
             logger.error(f"Error fetching menu items: {e}")
