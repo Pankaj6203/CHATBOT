@@ -30,6 +30,8 @@
             box-sizing: border-box;
         }
 
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-body);
@@ -212,7 +214,14 @@
             font-size: 1.15rem;
         }
 
-        .menu-grid {
+        .feature-desc {
+            font-size: .88rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* ── Contact Section ─────────────────────────────────── */
+        .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
