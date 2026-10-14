@@ -77,7 +77,7 @@ Body: {
 ```env
 # Twilio WhatsApp Configuration
 TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxc
-TWILIO_AUTH_TOKEN=c6a3fc6945732de6b38b413fdec424770
+TWILIO_AUTH_TOKEN=<your-auth-token>
 TWILIO_WHATSAPP_NUMBER=+14155238886
 
 # Enable/Disable Twilio notifications
@@ -230,7 +230,7 @@ Twilio service sends WhatsApp message
 
 ```
 Account SID: ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxc
-Auth Token: c6a3fc6945732de6b38b413fdec424770
+Auth Token: <your-auth-token>
 Twilio Number: +14155238886
 ```
 

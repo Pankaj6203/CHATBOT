@@ -238,8 +238,8 @@ cat .env
 
 # Verify credentials
 # Username: pankaj_db_user
-# Password: Pr09d@9664
-# Host: cluster0.uy7xu4q.mongodb.net
+# Password: <your-password>
+# Host: <your-cluster>.mongodb.net
 ```
 
 ### Issue: WhatsApp messages not received
@@ -342,7 +342,7 @@ Your restaurant chatbot system is **complete and production-ready**.
 
 **Current Status:**
 - Flask Server: http://localhost:5000 ✓
-- MongoDB: cluster0.uy7xu4q.mongodb.net ✓
+- MongoDB: <your-cluster>.mongodb.net ✓
 - Menu: 5 items, fully persisted ✓
 - Orders: 3 saved with complete history ✓
 

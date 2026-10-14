@@ -23,8 +23,8 @@ Your restaurant chatbot system is now fully integrated with **MongoDB Atlas** (c
 ```
 # MongoDB Atlas Connection
 MONGODB_USERNAME=pankaj_db_user
-MONGODB_PASSWORD=Pr09d@9664
-MONGODB_HOST=cluster0.uy7xu4q.mongodb.net
+MONGODB_PASSWORD=<your-password>
+MONGODB_HOST=<your-cluster>.mongodb.net
 MONGODB_DATABASE=Nirmla_sweets
 DATABASE_TYPE=mongodb
 
@@ -172,7 +172,7 @@ Last integration test:
 - Ensure WhatsApp IP is whitelisted in MongoDB Atlas (if using IP whitelist)
 
 **Can't connect to MongoDB**
-- Verify credentials: `pankaj_db_user` / `Pr09d@9664` / `cluster0.uy7xu4q.mongodb.net`
+- Verify credentials: `pankaj_db_user` / `<your-password>` / `<your-cluster>.mongodb.net`
 - Check Database_TYPE=mongodb in .env
 - Restart Flask server after changing .env
 - Check MongoDB Atlas cluster status
