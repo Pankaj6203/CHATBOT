@@ -3,6 +3,7 @@ Twilio WhatsApp Integration for Nirmla Sweets Chatbot
 Send/receive WhatsApp messages via Twilio
 """
 
+import os
 import logging
 from typing import Dict, Optional, List
 from twilio.rest import Client
@@ -289,8 +290,8 @@ if __name__ == "__main__":
     from mongodb_database import MongoDatabase
     
     # Initialize Twilio
-    ACCOUNT_SID = "AC02c43388674e1a6e2f47b5c3d818842fc"
-    AUTH_TOKEN = "c6a3fc6945732de6b38b413fdec424770"
+    ACCOUNT_SID = os.environ["TWILIO_ACCOUNT_SID"]
+    AUTH_TOKEN = os.environ["TWILIO_AUTH_TOKEN"]
     TWILIO_NUMBER = "+14155238886"  # Twilio sandbox WhatsApp number
     
     print("Initializing Twilio WhatsApp Service...")

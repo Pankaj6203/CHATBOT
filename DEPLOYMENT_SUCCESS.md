@@ -289,8 +289,8 @@ WhatsApp Business API
 ### `.env` (Environment)
 ```
 MONGODB_USERNAME=pankaj_db_user
-MONGODB_PASSWORD=Pr09d@9664
-MONGODB_HOST=cluster0.uy7xu4q.mongodb.net
+MONGODB_PASSWORD=<your-password>
+MONGODB_HOST=<your-cluster>.mongodb.net
 MONGODB_DATABASE=Nirmla_sweets
 DATABASE_TYPE=mongodb
 
