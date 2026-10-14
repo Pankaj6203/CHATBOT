@@ -4,6 +4,7 @@ Uses MongoDB Atlas cloud database
 """
 
 import logging
+import os
 from datetime import datetime
 from typing import List, Dict, Optional, Any
 from urllib.parse import quote_plus
@@ -361,7 +362,8 @@ class MongoDatabase:
 
 if __name__ == "__main__":
     # Test connection
-    CONNECTION_STRING = "mongodb+srv://pankaj_db_user:Pr09d@9664@cluster0.uy7xu4q.mongodb.net/?appName=Cluster0"
+    CONNECTION_STRING = os.getenv("MONGODB_URI") or "mongodb+srv://{}:{}@{}/?appName=Cluster0".format(
+        quote_plus(os.environ["MONGODB_USERNAME"]), quote_plus(os.environ["MONGODB_PASSWORD"]), os.environ["MONGODB_HOST"])
     
     try:
         db = MongoDatabase(CONNECTION_STRING)

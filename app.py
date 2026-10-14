@@ -143,7 +143,7 @@ def verify_webhook():
     Webhook verification endpoint for WhatsApp
     WhatsApp sends a GET request with parameters to verify the webhook
     """
-    verify_token = "your_verify_token_here"  # Change this to your token
+    verify_token = os.getenv("WHATSAPP_VERIFY_TOKEN", "")
     token = request.args.get('hub.verify_token')
     challenge = request.args.get('hub.challenge')
     

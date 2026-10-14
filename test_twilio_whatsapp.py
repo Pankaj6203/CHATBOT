@@ -2,6 +2,7 @@
 Test Twilio WhatsApp Integration
 """
 
+import os
 import requests
 import json
 from twilio_whatsapp import TwilioWhatsApp
@@ -16,8 +17,8 @@ print("="*70 + "\n")
 print("1. Initialize Twilio WhatsApp Service")
 print("-" * 70)
 try:
-    ACCOUNT_SID = "AC02c43388674e1a6e2f47b5c3d818842fc"
-    AUTH_TOKEN = "c6a3fc6945732de6b38b413fdec424770"
+    ACCOUNT_SID = os.environ["TWILIO_ACCOUNT_SID"]
+    AUTH_TOKEN = os.environ["TWILIO_AUTH_TOKEN"]
     TWILIO_NUMBER = "+14155238886"  # Twilio Sandbox WhatsApp number
     
     whatsapp = TwilioWhatsApp(ACCOUNT_SID, AUTH_TOKEN, TWILIO_NUMBER)
